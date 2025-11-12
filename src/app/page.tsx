@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Header, About } from './Components';
+import { Header, About, Showreel } from './Components';
 
 import { scene } from '../types';
 
@@ -21,11 +21,12 @@ export default function Home() {
 
   
   return (
-      <main className="h-screen w-full p-8">
+      <main className="h-screen w-full">
         <Header currentScene={currentScene} setCurrentScene={setCurrentScene} />
         {/* <div className='absolute top-40 left-0 w-full h-[50vh] -z-10'>
           {renderScene()}
         </div> */}
+        <Showreel />
       </main>
   );
 }

@@ -34,13 +34,13 @@ export default function Header({currentScene, setCurrentScene}: {currentScene: s
   };
 
   return (
-    <header className="w-full h-full flex flex-col justify-between z-50">
+    <header className="fixed w-full h-full flex flex-col justify-between p-8 z-50">
       <h1 className="w-full text-center uppercase text-white text-[22px] self-center bg-black py-2 text-nowrap overflow-hidden">Velocity Creative</h1>
       
       <div>
         {
           currentScene === 'about' &&
-          <div className="w-full h-[40vh] bg-black p-4 overflow-y-scroll">
+          <div className="w-full h-[40vh] bg-black p-4 overflow-y-scroll mt-2">
             <h2>Crafted by Insight - Elevated by AI</h2>
             <p>Lorem Ipsum is simply dummy text of the 
               printing and typesetting industry. Lorem 
@@ -63,7 +63,7 @@ export default function Header({currentScene, setCurrentScene}: {currentScene: s
           type="button"
           title='Menu Button'
           onClick={toggleMenu}
-          className="flex items-center justify-center size-12 bg-[black] focus:outline-none"
+          className="flex items-center justify-center size-12 bg-black focus:outline-none"
           >
           {isOpen ? (
             <svg
