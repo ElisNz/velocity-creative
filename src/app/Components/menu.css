@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes menu-fade-in {
+  0% { opacity: 0; transform: scale(0.8) rotate(-90deg);}
+  100% { opacity: 1; transform: scale(1) rotate(0deg);}
+}
+@keyframes menu-fade-out {
+  0% { opacity: 1; transform: scale(1) rotate(0deg);}
+  100% { opacity: 0; transform: scale(0.8) rotate(90deg);}
+}
+
+.menu-fade-in {
+  @apply transition-all;
+  animation: menu-fade-in 0.3s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.menu-fade-out {
+  @apply transition-all;
+  animation: menu-fade-out 0.3s cubic-bezier(0.4,0,0.2,1) forwards;
+}
