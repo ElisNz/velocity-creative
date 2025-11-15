@@ -26,7 +26,7 @@ export default function Menu() {
   }, []);
 
   const Button = ({label, onClick}: {label: string, onClick: () => void}) => (
-    <button type='button' className={`${currentScene === label.toLowerCase() ? 'text-white/50': ''} text-3xl`} onClick={onClick}>{label}</button>
+    <button type='button' className={`${currentScene === label.toLowerCase() ? 'text-white/50': ''}`} onClick={onClick}><h2 className='text-[2rem]'>{label}</h2></button>
   );
 
   const ModuleBox = ({children}: {children: React.ReactNode}) => (
@@ -106,7 +106,7 @@ export default function Menu() {
 
   return (
     <hgroup className="fixed w-full h-screen max-h-full flex flex-col justify-between p-8 z-50">
-      <h1 className="w-full text-center align-middle md:text-[4rem] uppercase text-white self-center bg-black py-2 mb-2 text-nowrap">Velocity Creative</h1>
+      <h1 className="select-none w-full text-center align-middle md:text-[4rem] uppercase text-white self-center bg-black py-2 mb-2 text-nowrap">Velocity Creative</h1>
       
       <div>      
         <ModuleBox>
