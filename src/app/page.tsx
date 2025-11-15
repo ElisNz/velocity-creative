@@ -1,7 +1,4 @@
-'use client';
-
 import { Menu, Showreel } from './Components';
-
 
 export default function Home() {
   return (
