@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useMemo, useCallback } from 'react';
-import { Transition, TransitionChild } from '@headlessui/react'
+import { Transition } from '@headlessui/react';
+import Image from 'next/image';
 import { About, Work, Contact } from '.';
 
 import { scene } from '../types';
@@ -26,13 +27,13 @@ export default function Menu() {
   };
 
   const Button = ({label, onClick}: {label: string, onClick: () => void}) => (
-      <button type='button' onClick={onClick}><h2 className={`${currentScene === label.toLowerCase() ? 'text-[#FFFFFF62]': ''} text-[2rem] transition-all duration-300 data-closed:text-transparent mb-0`}>{label}</h2></button>
+      <button type='button' onClick={onClick}><h2 className={`${currentScene === label.toLowerCase() ? 'text-[#FFFFFF62]': ''} text-[1.7rem] md:text-[2rem] transition-all duration-300 data-closed:text-transparent mb-0`}>{label}</h2></button>
   );
 
   const ModuleBox = useCallback(({children}: {children: React.ReactNode}) => (
     <>
       <Transition show={isModuleVisible && isFinishedOpening} appear>
-        <div className="transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:h-0 data-transition:text-white/0 data-transition:w-[10rem] w-full h-[15rem] md:h-[13rem] bg-black/80 p-4 data-transition:mb-0 mb-2 data-transition:overflow-hidden overflow-y-scroll scrollbar-foreground">
+        <div className="h-[50vh] transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:h-0 data-transition:text-white/0 data-transition:w-[10rem] w-full h-[15rem] md:h-[13rem] bg-[#141215]/90 rounded-xs p-4 data-transition:mb-0 mb-2 data-transition:overflow-hidden overflow-y-scroll scrollbar-foreground">
           <button
             type="button"
             title='Menu Button'
@@ -60,7 +61,7 @@ export default function Menu() {
       type="button"
       title="Menu Button"
       onClick={() => toggleMenu()}
-      className="flex items-center justify-center size-[3.5rem] bg-black/80 focus:outline-none"
+      className="flex items-center justify-center size-[3.5rem] bg-[#141215]/90 rounded-xs focus:outline-none"
     >
       {isOpen ? (
         <svg
@@ -104,16 +105,18 @@ export default function Menu() {
   }, [currentScene]);
 
   return (
-    <hgroup className="fixed w-full h-screen max-h-full flex flex-col justify-between p-8 z-50">
-      <h1 className="select-none w-full text-center align-middle md:text-[4rem] uppercase text-white self-center bg-black/80 py-2 mb-2 text-nowrap">Velocity Creative</h1>
-      
-      <div>      
+    <hgroup className="fixed w-full h-screen max-h-full flex flex-col justify-between px-4 md:px-8 py-[5vh] z-50">
+      {/* <h1 className="select-none w-full text-center align-middle md:text-[4rem] uppercase text-white self-center bg-[#141215]/90 py-2 mb-2 text-nowrap">Velocity Creative</h1> */}
+
+      <Image src="/velocity-header-logo.png" alt="Velocity Creative Logo" width={500} height={43} className="select-none max-md:self-center mb-2" />
+
+      <div className='max-h-[85vh]'>      
         <ModuleBox>
           {renderScene}
         </ModuleBox>
 
         <Transition show={isOpen} afterLeave={() => setIsFinishedOpening(false)} afterEnter={() => setIsFinishedOpening(true)}>
-          <nav className={`transition-all duration-100 data-closed:h-[0px] data-transition:opacity-0 data-transition:w-[3.5rem] w-[10rem] h-[10rem] data-open:md:size-fit bg-black/80 flex flex-col gap-y-2 items-center justify-center data-transition:p-0 data-transition:m-0 p-4 mb-2 overflow-hidden`}>
+          <nav className={`transition-all duration-100 data-closed:h-[0px] data-transition:opacity-0 data-transition:w-[3.5rem] w-[20vh] h-[20vh] bg-[#141215]/90 rounded-xs flex flex-col items-center justify-center data-transition:p-0 data-transition:m-0 p-4 mb-2 overflow-hidden`}>
               {labels.map((label) => (
                 <Button
                   key={label}
