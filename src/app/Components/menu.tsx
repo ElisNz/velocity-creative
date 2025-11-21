@@ -9,14 +9,14 @@ import { scene } from '../types';
 import './menu.css';
 
 
-export default function Menu() {
+export default function Menu({ imagePromise }: { imagePromise?: any }) {
   const [currentScene, setCurrentScene] = useState<scene>('menu');
   const [isOpen, setIsOpen] = useState(false);
   const [isFinishedOpening, setIsFinishedOpening] = useState(false);
 
-
   const labels = ['About', 'Work', 'Contact'];
   const isModuleVisible = useMemo(() => currentScene !== 'menu' && isOpen, [currentScene, isOpen]);
+
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -33,8 +33,8 @@ export default function Menu() {
   const ModuleBox = useCallback(({children}: {children: React.ReactNode}) => (
     <>
       <Transition show={isModuleVisible && isFinishedOpening} appear>
-        <div className="h-[50vh] transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:h-0 data-transition:text-white/0 data-transition:w-[10rem] w-full h-[15rem] md:h-[13rem] bg-[#141215]/90 rounded-xs p-4 data-transition:mb-0 mb-2 data-transition:overflow-hidden overflow-y-scroll scrollbar-foreground">
-          <button
+        <div className="h-[50vh] transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:h-0 data-transition:text-white/0 data-transition:w-[20vh] w-full h-[15rem] md:h-[13rem] bg-[#141215]/90 rounded-xs p-4 data-transition:mb-0 mb-2 data-transition:overflow-hidden overflow-y-scroll scrollbar-foreground">
+          {/* <button
             type="button"
             title='Menu Button'
             onClick={handleNavigation.bind(null, 'menu')}
@@ -49,7 +49,7 @@ export default function Menu() {
             >
               <path strokeLinecap="square" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
-          </button>
+          </button> */}
           {children}
         </div>
       </Transition>
@@ -108,7 +108,7 @@ export default function Menu() {
     <hgroup className="fixed w-full h-screen max-h-full flex flex-col justify-between px-4 md:px-8 py-[5vh] z-50">
       {/* <h1 className="select-none w-full text-center align-middle md:text-[4rem] uppercase text-white self-center bg-[#141215]/90 py-2 mb-2 text-nowrap">Velocity Creative</h1> */}
 
-      <Image src="/velocity-header-logo.png" alt="Velocity Creative Logo" width={500} height={43} className="select-none max-md:self-center mb-2" />
+      <Image src="/velocity-header-logo.png" loading='eager' alt="Velocity Creative Logo" width={500} height={43} className="select-none max-md:self-center mb-2" />
 
       <div className='max-h-[85vh]'>      
         <ModuleBox>

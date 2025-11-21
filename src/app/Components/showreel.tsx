@@ -1,12 +1,16 @@
 import { Suspense } from "react";
-import { GetStaticProps } from "next";
 import Image from "next/image";
 import { list } from '@vercel/blob';
+
+import { StatusCodes } from "../types";
 
 
 export default async function Showreel() {
   const videoURL = await list({token: process.env.BLOB_STORAGE_READ_TOKEN || '', prefix: 'SHOWREEL'});
-  const { downloadUrl } = videoURL.blobs[0];
+
+  // * use downloadUrl to force download. Currently displaying inline *
+  const { url } = videoURL.blobs[0];
+  const isStatusOk = (await fetch(url)).status === StatusCodes.Success;
 
   return (
     <Suspense fallback={
@@ -20,24 +24,24 @@ export default async function Showreel() {
         />
       </div>}
     >
-      {downloadUrl &&
+      {isStatusOk ?
         <div className="absolute size-full -z-50">
           <video className="w-full h-full object-cover" autoPlay loop muted>
-            <source src={downloadUrl} type="video/mp4" />
+            <source src={url} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+        </div> 
+        :
+        <div className="absolute size-full -z-50">
+          <Image
+            src="/Screenshot (92).png"
+            alt="Showreel Background fallback"
+            fill
+            className="object-cover"
+            priority
+          />
         </div>
       }
     </Suspense>
   );
 };
-
-/* export const getStaticProps: GetStaticProps = async () => {
-  const { blobs } = await list({token: process.env.BLOB_STORAGE_READ_TOKEN || '', prefix: 'SHOWREEL'});
-
-  return {
-    props: {
-      blobs,
-    },
-  };
-}; */
