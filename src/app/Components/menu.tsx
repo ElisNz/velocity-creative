@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { Transition } from '@headlessui/react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { About, Work, Contact } from '.';
 
-import { scene } from '../types';
+import { scene, scenes } from '../types';
 import './menu.css';
 
 
@@ -16,13 +17,14 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
 
   const labels = ['About', 'Work', 'Contact'];
   const isModuleVisible = useMemo(() => currentScene !== 'menu' && isOpen, [currentScene, isOpen]);
-
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const handleNavigation = (scene: scene) => {
+    window.history.replaceState(null, '', `/${scene}`);
     setCurrentScene(scene);
   };
 
@@ -103,6 +105,19 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
         return null;
     }
   }, [currentScene]);
+
+  
+  useEffect(() => {
+    if (pathname === '/') { return; }
+
+    if (scenes.includes(pathname.split('/').pop() as scene)){
+      setCurrentScene(pathname.split('/').pop() as scene);
+    } else {
+      setCurrentScene('work');
+    }
+
+    setIsOpen(true);
+  }, []);
 
   return (
     <hgroup className="fixed w-full h-screen max-h-full flex flex-col justify-between px-4 md:px-8 py-[5vh] z-50">

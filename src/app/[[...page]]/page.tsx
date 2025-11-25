@@ -1,5 +1,5 @@
 // import { list } from '@vercel/blob';
-import { Menu, Showreel } from './Components';
+import { Menu, Showreel } from '../Components';
 
 export default function Home() {
   // const imageList = list({ token: process.env.BLOB_STORAGE_READ_TOKEN || '', prefix: 'WORK' });
@@ -11,4 +11,3 @@ export default function Home() {
       </main>
   );
 };
-

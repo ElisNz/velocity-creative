@@ -1,4 +1,10 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+
+
+import { Case } from './';
 
 const work = [
   {
@@ -18,27 +24,37 @@ const work = [
   },
 ];
 
-const WorkCover = ({ title, coverImageUrl }: { title: string, coverImageUrl: string }) => (
-  <div className="relative w-full h-[45vh] lg:h-[50vh] overflow-hidden rounded-xs group cursor-pointer z-50">
-    <Image
-      src={coverImageUrl}
-      alt={title}
-      fill
-      className="object-cover transform transition-all duration-500 z-10"
-    />
-    <div className="absolute size-full bg-black/20 flex items-center justify-center z-50">
-      <h1 className='text-center capitalize'>{title}</h1>
-    </div>
-  </div>
-);
-
 export default function Work(props?: any) {
+  const pathname = usePathname();
+  const showWorkCovers = pathname === '/';
+  const showCase = pathname !== '/';
+
+  const WorkCover = ({ title, coverImageUrl }: { title: string, coverImageUrl: string }) => (
+    <div onClick={() => window.history.replaceState(null, '', encodeURIComponent(title))} className="relative w-full h-[45vh] lg:h-[50vh] overflow-hidden rounded-xs group cursor-pointer z-50">
+      <Image
+        src={coverImageUrl}
+        alt={title}
+        fill
+        className="object-cover transform transition-all duration-500 z-10"
+      />
+      <div className="absolute size-full bg-black/20 flex items-center justify-center z-50">
+        <h1 className='text-center capitalize'>{title}</h1>
+      </div>
+    </div>
+  );
+
   return (
     <div className="w-full h-fit flex flex-col items-center justify-center gap-2">
-      {work.map(({ title, coverImageUrl }) => (
-        <WorkCover key={title} title={title} coverImageUrl={coverImageUrl} />
-      ))
+      {showWorkCovers &&
+        work.map(({ title, coverImageUrl }) => 
+          <WorkCover key={title} title={title} coverImageUrl={coverImageUrl} />
+        )
       }
+      
+      {showCase &&
+        <Case />
+      }
+
     </div>
   );
 };

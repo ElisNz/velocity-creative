@@ -1,4 +1,6 @@
+
 export default function Contact() {
+
   return (
     <div className="max-h-full flex flex-col gap-8">
       <article>
