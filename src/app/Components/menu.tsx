@@ -34,9 +34,9 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
 
   const ModuleBox = useCallback(({children}: {children: React.ReactNode}) => (
     <Transition show={isModuleVisible && isFinishedOpening} appear>
-      <div className='transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] h-[50vh] w-full p-4 mb-2 bg-[#141215]/90 overflow-hidden'>
+      <div className='transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] h-[50vh] w-full px-2 py-4 mb-2 bg-[#141215]/90 overflow-hidden'>
       
-        <div className="h-full w-full h-[15rem] md:h-[13rem] rounded-xs px-4 data-transition:mb-0 data-transition:overflow-hidden overflow-y-auto scrollbar-foreground ">
+        <div className="h-full w-full h-[15rem] md:h-[13rem] rounded-xs px-2 data-transition:mb-0 data-transition:overflow-hidden overflow-y-auto scrollbar-foreground ">
           {/* <button
             type="button"
             title='Menu Button'
@@ -133,7 +133,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
         </ModuleBox>
 
         <Transition show={isOpen} afterLeave={() => setIsFinishedOpening(false)} afterEnter={() => setIsFinishedOpening(true)}>
-          <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] w-[20vh] min-w-fit h-[20vh] bg-[#141215]/90 rounded-xs flex flex-col items-center justify-center px-4 mb-2 overflow-hidden`}>
+          <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] w-[20vh] min-w-fit h-[20vh] bg-[#141215]/90 rounded-xs flex flex-col items-center justify-center px-4 md:px-8 mb-2 overflow-hidden`}>
               {labels.map((label) => (
                 <Button
                   key={label}
