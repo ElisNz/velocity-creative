@@ -22,6 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link
+        rel="preload"
+        href="/fonts/Frick0.3-Regular.woff2"
+        as="font"
+        crossOrigin=""
+      />
       <body
         className={`${lato.variable} antialiased`}
       >

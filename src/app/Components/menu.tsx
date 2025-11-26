@@ -29,7 +29,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
   };
 
   const Button = ({label, onClick}: {label: string, onClick: () => void}) => (
-      <button type='button' onClick={onClick}><h2 className={`${currentScene === label.toLowerCase() ? 'text-[#FFFFFF62]': ''} text-[1.7rem] md:text-[2rem] transition-all duration-300 data-closed:text-transparent mb-0`}>{label}</h2></button>
+      <button type='button' onClick={onClick}><h2 className={`${currentScene === label.toLowerCase() ? 'text-[#FFFFFF62]': ''} transition-all duration-300 data-closed:text-transparent mb-0`}>{label}</h2></button>
   );
 
   const ModuleBox = useCallback(({children}: {children: React.ReactNode}) => (
@@ -121,9 +121,9 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
 
   return (
     <hgroup className="fixed w-full h-screen max-h-full flex flex-col justify-between px-4 md:px-8 py-[5vh] z-50">
-      {/* <h1 className="select-none w-full text-center align-middle md:text-[4rem] uppercase text-white self-center bg-[#141215]/90 py-2 mb-2 text-nowrap">Velocity Creative</h1> */}
+      <h1 className="select-none max-md:w-full text-center align-middle md:text-[4rem] uppercase text-white self-center bg-[#141215]/90 pb-2 pt-3 px-4 mb-2 text-nowrap">Velocity Creative</h1>
 
-      <Image src="/velocity-header-logo.png" loading='eager' alt="Velocity Creative Logo" width={500} height={43} className="select-none max-md:self-center mb-2" />
+      {/* <Image src="/velocity-header-logo.png" loading='eager' alt="Velocity Creative Logo" width={500} height={43} className="select-none max-md:self-center mb-2" /> */}
 
       <div className='max-h-[85vh]'>      
         <ModuleBox>
