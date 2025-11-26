@@ -122,7 +122,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
   }, []);
 
   return (
-    <hgroup className="fixed w-full h-screen flex flex-col justify-between px-4 md:px-8 py-[5vh] z-50">
+    <hgroup className="fixed w-full h-screen flex flex-col justify-between p-4 md:p-8 mb-[15dvh] z-50">
       <h1 className="align-middle select-none max-md:w-full text-center max-md:align-middle md:text-[4rem] uppercase text-white max-md:self-center md:self-start bg-[#141215]/90 pb-2 pt-3 px-4 md:px-8 mb-2 text-nowrap">Velocity Creative</h1>
 
       {/* <Image src="/velocity-header-logo.png" loading='eager' alt="Velocity Creative Logo" width={500} height={43} className="select-none max-md:self-center mb-2" /> */}
