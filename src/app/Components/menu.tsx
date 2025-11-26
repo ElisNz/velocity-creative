@@ -29,7 +29,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
   };
 
   const Button = ({label, onClick}: {label: string, onClick: () => void}) => (
-      <button type='button' onClick={onClick} className='w-full'><h2 className={`${currentScene === label.toLowerCase() ? 'text-[#FFFFFF62]': ''} w-full text-left transition-all duration-300 data-closed:text-transparent mb-0`}>{label}</h2></button>
+      <button type='button' onClick={onClick} className='w-full'><h2 className={`${currentScene === label.toLowerCase() ? 'text-[#FFFFFF62]': ''} w-full text-left mb-0`}>{label}</h2></button>
   );
 
   const ModuleBox = useCallback(({children}: {children: React.ReactNode}) => (
@@ -134,7 +134,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
       </div>
 
       <Transition show={isOpen} afterLeave={() => setIsFinishedOpening(false)} afterEnter={() => setIsFinishedOpening(true)}>
-        <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] w-[20vh] min-w-fit max-md:h-[20vh] bg-[#141215]/90 rounded-xs flex flex-col items-center justify-evenly p-4 mb-2 overflow-hidden`}>
+        <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] w-[20vh] min-w-fit bg-[#141215]/90 rounded-xs flex flex-col items-center justify-evenly px-4 py-2 mb-2 overflow-hidden`}>
             {labels.map((label) => (
               <Button
                 key={label}
