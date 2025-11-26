@@ -29,13 +29,14 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
   };
 
   const Button = ({label, onClick}: {label: string, onClick: () => void}) => (
-      <button type='button' onClick={onClick}><h2 className={`${currentScene === label.toLowerCase() ? 'text-[#FFFFFF62]': ''} transition-all duration-300 data-closed:text-transparent mb-0`}>{label}</h2></button>
+      <button type='button' onClick={onClick} className='w-full'><h2 className={`${currentScene === label.toLowerCase() ? 'text-[#FFFFFF62]': ''} w-full text-left transition-all duration-300 data-closed:text-transparent mb-0`}>{label}</h2></button>
   );
 
   const ModuleBox = useCallback(({children}: {children: React.ReactNode}) => (
-    <>
-      <Transition show={isModuleVisible && isFinishedOpening} appear>
-        <div className="h-[50vh] transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:h-0 data-transition:text-white/0 data-transition:w-[20vh] w-full h-[15rem] md:h-[13rem] bg-[#141215]/90 rounded-xs p-4 data-transition:mb-0 mb-2 data-transition:overflow-hidden overflow-y-scroll scrollbar-foreground">
+    <Transition show={isModuleVisible && isFinishedOpening} appear>
+      <div className='transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] h-[50vh] w-full p-4 mb-2 bg-[#141215]/90 overflow-hidden'>
+      
+        <div className="h-full w-full h-[15rem] md:h-[13rem] rounded-xs px-4 data-transition:mb-0 data-transition:overflow-hidden overflow-y-auto scrollbar-foreground ">
           {/* <button
             type="button"
             title='Menu Button'
@@ -54,8 +55,9 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
           </button> */}
           {children}
         </div>
-      </Transition>
-    </>
+      
+    </div>
+    </Transition>
   ), [isModuleVisible, handleNavigation]);
 
   const MenuButton = useCallback(() => (
@@ -131,7 +133,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
         </ModuleBox>
 
         <Transition show={isOpen} afterLeave={() => setIsFinishedOpening(false)} afterEnter={() => setIsFinishedOpening(true)}>
-          <nav className={`transition-all duration-100 data-closed:h-[0px] data-transition:opacity-0 data-transition:w-[3.5rem] w-[20vh] h-[20vh] bg-[#141215]/90 rounded-xs flex flex-col items-center justify-center data-transition:p-0 data-transition:m-0 p-4 mb-2 overflow-hidden`}>
+          <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] w-[20vh] min-w-fit h-[20vh] bg-[#141215]/90 rounded-xs flex flex-col items-center justify-center px-4 mb-2 overflow-hidden`}>
               {labels.map((label) => (
                 <Button
                   key={label}

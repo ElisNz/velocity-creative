@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 
 import { Case } from './';
+import { scene, scenes } from '../types';
 
 const work = [
   {
@@ -26,8 +27,8 @@ const work = [
 
 export default function Work(props?: any) {
   const pathname = usePathname();
-  const showWorkCovers = pathname === '/';
-  const showCase = pathname !== '/';
+  const showWorkCovers = pathname === '/work';
+  const showCase = !scenes.includes(pathname.split('/').pop() as scene) && pathname !== '/';
 
   const WorkCover = ({ title, coverImageUrl }: { title: string, coverImageUrl: string }) => (
     <div onClick={() => window.history.replaceState(null, '', encodeURIComponent(title))} className="relative w-full h-[45vh] lg:h-[50vh] overflow-hidden rounded-xs group cursor-pointer z-50">

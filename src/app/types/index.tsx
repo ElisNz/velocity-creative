@@ -1,5 +1,6 @@
 export type scene = 'menu' | 'about' | 'work' | 'contact';
-export const scenes:scene[] = ['menu', 'about', 'work', 'contact'];
+export const scenes: scene[] = ['menu', 'about', 'work', 'contact'];
+
 export enum StatusCodes {
   NotFound = 404,
   Rejected = 403,

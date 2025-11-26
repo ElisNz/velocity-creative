@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -22,12 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link
-        rel="preload"
-        href="/fonts/Frick0.3-Regular.woff2"
-        as="font"
-        crossOrigin=""
-      />
+      <Head>
+        <link
+          rel="preload"
+          href="/fonts/Frick0.3-Regular.woff2"
+          as="font"
+          crossOrigin=""
+        />
+      </Head>
       <body
         className={`${lato.variable} antialiased`}
       >
