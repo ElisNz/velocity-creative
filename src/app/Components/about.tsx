@@ -2,7 +2,7 @@ export default function About() {
   return (
     <>
       <section>
-        <h2 className="mb-[1rem]">Crafted by Insight - Elevated by AI</h2>
+        <h2 className="mb-[1rem] uppercase">REDEFINING STRATEGIC BRANDING</h2>
         <p>Drawing on over 25 years of experience in photography, design, strategic communication, and journalism, we blend the art of traditional image-making with the transformative power of AI.
           Our expertise allows us to craft compelling visuals—whether captured through the lens of a camera or created with advanced generative tools.
             With a global perspective and deep industry insight, we create imagery and creative solutions that unite classic craftsmanship with the possibilities of emerging technology.

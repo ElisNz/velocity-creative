@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #051134;
-  --foreground: #ffffff;
+  --background: #FFFFFF;
+  --foreground: #FF0000;
 }
 
 @theme inline {
@@ -30,10 +30,16 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Lato, sans-serif;
   font-size: 14px;
   line-height: 1.5;
 }
@@ -46,30 +52,32 @@ body {
 
 p {
   margin-bottom: 1rem;
+  font-family: Switzer, sans-serif;
+  font-weight: 400;
+  line-height: 1.3;
 }
 
 h2, h3 {
-  font-family: Frick, sans-serif;
-  color: var(--foreground);
+  font-family: Switzer, sans-serif;
 }
 h1 {
-  font-family: Frick, sans-serif;
+  font-family: Switzer, sans-serif;
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 800;
 }
 h2 {
-  font-size: 1.3rem;
-  font-weight: 400;
-  line-height: 1.25;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
 }
 h3 {
-  font-size: 1.1rem;
-  font-weight: 400;
-  line-height: 1.25;
+  font-size: 1.5rem;
+  font-weight: 800;
+
 }
 
 a {
-  color: rgb(178, 178, 255);
+  color: rgb(0, 0, 0);
   text-decoration: underline;
   text-underline-offset: 0.25rem;
 }
@@ -126,6 +134,25 @@ button:hover {
 }
 
 .scrollbar-foreground::-webkit-scrollbar-track {
+  background: var(--foreground);
+  border-radius: 0px;
+}
+
+.scrollbar-background {
+  scrollbar-width: 1rem;
+  scrollbar-color: var(--foreground);
+  border-radius: 0px;
+}
+
+.scrollbar-background::-webkit-scrollbar {
+  width: 1rem;
+  background: var(--foreground);
+}
+.scrollbar-background::-webkit-scrollbar-thumb {
+  background: var(--foreground);
+  border-radius: 0px;
+}
+.scrollbar-background::-webkit-scrollbar-track {
   background: var(--foreground);
   border-radius: 0px;
 }

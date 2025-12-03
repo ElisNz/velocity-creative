@@ -29,14 +29,14 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
   };
 
   const Button = ({label, onClick}: {label: string, onClick: () => void}) => (
-      <button type='button' onClick={onClick} className='w-full'><h2 className={`${currentScene === label.toLowerCase() ? 'text-[#FFFFFF62]': ''} w-full text-left mb-0`}>{label}</h2></button>
+      <button type='button' onClick={onClick} className='w-full'><h3 className={`${currentScene === label.toLowerCase() ? 'text-[#FF0000]/50 italic': ''}  uppercase w-full text-left mb-0`}>{label}</h3></button>
   );
 
   const ModuleBox = useCallback(({children}: {children: React.ReactNode}) => (
     <Transition show={isModuleVisible && isFinishedOpening} appear>
-      <div className='w-full h-full transition-all duration-300 data-transition:mb-0 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] w-full px-2 py-4 mb-2 bg-[#141215]/90 overflow-hidden'>
+      <div className='w-full h-full transition-all duration-300 data-transition:mb-0 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] w-full px-2 py-4 mb-2 bg-background overflow-hidden'>
       
-        <div className="w-full h-full rounded-xs px-2 overflow-y-auto scrollbar-foreground ">
+        <div className="w-full h-full rounded-xs pl-2 pr-3 overflow-y-auto scrollbar-foreground ">
           {/* <button
             type="button"
             title='Menu Button'
@@ -65,12 +65,12 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
       type="button"
       title="Menu Button"
       onClick={() => toggleMenu()}
-      className="flex items-center justify-center size-[3.5rem] bg-[#141215]/90 rounded-xs focus:outline-none"
+      className="flex items-center justify-center size-[3.5rem] bg-background rounded-xs focus:outline-none"
     >
       {isOpen ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="size-10 text-white menu-fade-in"
+          className="size-10 menu-fade-in"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -82,10 +82,10 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
       ) : (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="size-10 text-white menu-fade-in"
+          className="size-10 menu-fade-in"
           fill="none"
           viewBox="0 0 24 24"
-          stroke="currentColor"
+          stroke="#FF0000"
           strokeWidth={2.5}
           key="hamburger"
         >
@@ -123,7 +123,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
 
   return (
     <hgroup className="absolute w-full h-full flex flex-col justify-between p-4 md:p-8 z-50">
-      <h1 className="align-middle select-none max-md:w-full text-center max-md:align-middle md:text-[4rem] uppercase text-white max-md:self-center md:self-start bg-[#141215]/90 pb-2 pt-3 px-4 md:px-8 mb-2 text-nowrap">Velocity Creative</h1>
+      <h1 className="align-middle select-none max-md:w-full text-center max-md:align-middle md:text-[4rem] uppercase max-md:self-center md:self-start bg-background py-2 px-4 md:px-8 mb-2 text-nowrap">Velocity Creative</h1>
 
       {/* <Image src="/velocity-header-logo.png" loading='eager' alt="Velocity Creative Logo" width={500} height={43} className="select-none max-md:self-center mb-2" /> */}
 
@@ -134,7 +134,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
       </div>
 
       <Transition show={isOpen} afterLeave={() => setIsFinishedOpening(false)} afterEnter={() => setIsFinishedOpening(true)}>
-        <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] w-[20vh] min-w-fit bg-[#141215]/90 rounded-xs flex flex-col items-center justify-evenly px-4 py-2 mb-2 overflow-hidden`}>
+        <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] w-[17vh] h-[17vh] min-h-fit min-w-fit bg-background rounded-xs flex flex-col items-center justify-center px-4 py-2 mb-2 overflow-hidden`}>
             {labels.map((label) => (
               <Button
                 key={label}

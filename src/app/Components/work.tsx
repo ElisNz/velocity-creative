@@ -39,7 +39,7 @@ export default function Work(props?: any) {
         className="object-cover transform transition-all duration-500 z-10"
       />
       <div className="absolute size-full flex items-center justify-center z-50">
-        <h1 className='bg-black/40 text-center capitalize p-4 rounded-xs'>{title}</h1>
+        <h1 className='uppercase bg-black/40 text-center capitalize p-4 rounded-xs text-white'>{title}</h1>
       </div>
     </div>
   );
