@@ -11,9 +11,9 @@ export default function Case(props?: any) {
   return (
       <div className="w-full h-fit flex flex-col items-center justify-center gap-0">
         
-          <section className="flex-1 gap-0 mb-0 wrap-anywhere">
-            <h2 className="uppercase w-full text-left mb-4">{caseName}</h2>
-            <p className="mb-[0px]">A collaboration with Scandinavia’s leading business law firm, spanning years and shaping a photographic visual identity while building a tailored image bank. </p>
+          <section className="flex-1 gap-0 mb-0">
+            <h2 className="uppercase w-full text-left mb-4 wrap-anywhere text-[2.4rem]">{caseName}</h2>
+            <p className="mb-[0px] text-balance">A collaboration with Scandinavia’s leading business law firm, spanning years and shaping a photographic visual identity while building a tailored image bank. </p>
           </section>
           <div className="flex h-fit w-full justify-start mb-2">
             <button onClick={() => window.history.replaceState(null, '', '/work')} title="back" type="button" className="w-fit h-full z-50">

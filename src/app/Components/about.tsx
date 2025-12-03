@@ -10,10 +10,10 @@ export default function About() {
       </section>
       <section>
         <h2 className="mb-[1rem]">What we do</h2>
-          <p className="mb-[0px]"><strong>Photography —</strong> On-location and studio photography, delivering high-quality images that capture the essence of your brand.</p>
-          <p className="mb-[0px]"><strong>AI-Generated Imagery —</strong> Bespoke visuals created through advanced generative technologies, pushing creative boundaries while maintaining brand coherence.</p>
-          <p className="mb-[0px]"><strong>Visual Strategy — </strong>Concepts and guidelines that shape how your brand communicates visually, ensuring a coherent and impactful presence across all platforms.</p>
-          <p className="mb-[0px]"><strong>Curated Image Libraries — </strong> We build and manage digital image banks tailored to your company’s needs, providing a cohesive resource for your visual strategy on all platforms — social media, campaigns, presentations, and long-term communication. </p>
+          <strong>Photography</strong><p className="mt-2"> On-location and studio photography, delivering high-quality images that capture the essence of your brand.</p>
+          <strong>AI-Generated Imagery</strong><p className="mt-2"> Bespoke visuals created through advanced generative technologies, pushing creative boundaries while maintaining brand coherence.</p>
+          <strong>Visual Strategy</strong><p className="mt-2">Concepts and guidelines that shape how your brand communicates visually, ensuring a coherent and impactful presence across all platforms.</p>
+          <strong>Curated Image Libraries </strong><p className="mt-2"> We build and manage digital image banks tailored to your company’s needs, providing a cohesive resource for your visual strategy on all platforms — social media, campaigns, presentations, and long-term communication. </p>
       </section>
     </>
   );
