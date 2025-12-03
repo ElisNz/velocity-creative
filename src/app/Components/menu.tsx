@@ -3,7 +3,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { Transition } from '@headlessui/react';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { About, Work, Contact } from '.';
 
 import { scene, scenes } from '../types';
@@ -18,6 +18,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
   const labels = ['About', 'Work', 'Contact'];
   const isModuleVisible = useMemo(() => currentScene !== 'menu' && isOpen, [currentScene, isOpen]);
   const pathname = usePathname();
+  const router = useRouter();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -123,8 +124,11 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
 
   return (
     <hgroup className="absolute w-full h-full flex max-lg:flex-col justify-between p-4 md:p-8 z-50 gap-x-2">
+
       <div className='w-full flex flex-col grow max-h-[90vh]'>
-        <h1 className="lg:h-[4rem] rounded-xs align-middle select-none max-md:w-full lg:w-fit text-center max-md:align-middle uppercase max-md:self-center md:self-start bg-background py-2 px-4 md:px-8 text-nowrap">Velocity Creative</h1>
+        <a title='home' href='/' className='w-full md:w-fit'>
+          <h1 className="lg:h-[4rem] rounded-xs text-foreground align-middle select-none lg:w-fit text-center max-md:align-middle uppercase max-md:self-center md:self-start bg-background py-2 px-4 md:px-8 text-nowrap">Velocity Creative</h1>
+        </a>
 
         <div className='max-lg:w-full lg:w-1/2 max-lg:h-[40vh] lg:max-h-full grow max-lg:mb-2 mt-2 overflow-hidden rounded-xs'>
           <ModuleBox>
@@ -133,21 +137,23 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
         </div>
       </div>
 
-      <Transition show={isOpen} afterLeave={() => setIsFinishedOpening(false)} afterEnter={() => setIsFinishedOpening(true)}>
-        <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] max-lg:w-[10vh] max-lg:h-[10vh] lg:h-[15rem] lg:w-[15rem] min-h-fit min-w-fit bg-background rounded-xs flex flex-col items-center justify-center px-4 py-2 max-lg:mb-2 overflow-hidden`}>
-            {labels.map((label) => (
-              <Button
-                key={label}
-                label={label}
-                onClick={() => {
-                  handleNavigation(label.toLowerCase() as 'about' | 'work' | 'contact');
-                }}
-              />
-            ))}
-        </nav>
-      </Transition>
+      <div className='flex max-lg:flex-col lg:flex-col-reverse lg:justify-end lg:items-end'>
+        <Transition show={isOpen} afterLeave={() => setIsFinishedOpening(false)} afterEnter={() => setIsFinishedOpening(true)}>
+          <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] max-lg:w-[10vh] max-lg:h-[10vh] lg:h-[10rem] lg:w-[10rem] min-h-fit min-w-fit bg-background rounded-xs flex flex-col items-center justify-center px-4 py-2 max-lg:mb-2 lg:mt-2 overflow-hidden`}>
+              {labels.map((label) => (
+                <Button
+                  key={label}
+                  label={label}
+                  onClick={() => {
+                    handleNavigation(label.toLowerCase() as 'about' | 'work' | 'contact');
+                  }}
+                />
+              ))}
+          </nav>
+        </Transition>
 
-      <MenuButton />
+        <MenuButton />
+      </div>
  
     </hgroup>
   );
