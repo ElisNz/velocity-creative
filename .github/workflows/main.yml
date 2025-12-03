@@ -1,0 +1,35 @@
+name: Check for Unclosed JSX/TSX Tags
+
+on:
+  pull_request:
+    paths:
+      - '**/*.jsx'
+      - '**/*.tsx'
+
+jobs:
+  check-closing-tags:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Find JSX/TSX files
+        run: |
+          find . -type f \( -name "*.jsx" -o -name "*.tsx" \) > files.txt
+
+      - name: Check for unclosed tags
+        run: |
+          ERROR=0
+          while read file; do
+            # Simple grep for tags not closed (does not cover all cases)
+            if grep -E '<[a-zA-Z0-9]+[^>/]*>$' "$file"; then
+              echo "Unclosed tag found in $file"
+              ERROR=1
+            fi
+          done < files.txt
+          if [ $ERROR -eq 1 ]; then
+            echo "❌ Unclosed JSX/TSX tag(s) detected."
+            exit 1
+          else
+            echo "✅ All JSX/TSX tags are properly closed."
+          fi
