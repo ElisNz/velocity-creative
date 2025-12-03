@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { Transition } from '@headlessui/react';
-import Image from 'next/image';
+
 import { usePathname } from 'next/navigation';
 import { About, Work, Contact } from '.';
 
@@ -65,7 +65,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
       type="button"
       title="Menu Button"
       onClick={() => toggleMenu()}
-      className="flex items-center justify-center size-[3.5rem] bg-background rounded-xs focus:outline-none"
+      className="flex items-center justify-center size-[4rem] bg-background rounded-xs focus:outline-none"
     >
       {isOpen ? (
         <svg
@@ -85,7 +85,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
           className="size-10 menu-fade-in"
           fill="none"
           viewBox="0 0 24 24"
-          stroke="#FF0000"
+          stroke="currentColor"
           strokeWidth={2.5}
           key="hamburger"
         >
@@ -122,19 +122,19 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
   }, []);
 
   return (
-    <hgroup className="absolute w-full h-full flex flex-col justify-between p-4 md:p-8 z-50">
-      <h1 className="align-middle select-none max-md:w-full text-center max-md:align-middle md:text-[4rem] uppercase max-md:self-center md:self-start bg-background py-2 px-4 md:px-8 mb-2 text-nowrap">Velocity Creative</h1>
+    <hgroup className="absolute w-full h-full flex max-lg:flex-col justify-between p-4 md:p-8 z-50 gap-x-2">
+      <div className='w-full flex flex-col grow max-h-[90vh]'>
+        <h1 className="lg:h-[4rem] rounded-xs align-middle select-none max-md:w-full lg:w-fit text-center max-md:align-middle uppercase max-md:self-center md:self-start bg-background py-2 px-4 md:px-8 text-nowrap">Velocity Creative</h1>
 
-      {/* <Image src="/velocity-header-logo.png" loading='eager' alt="Velocity Creative Logo" width={500} height={43} className="select-none max-md:self-center mb-2" /> */}
-
-      <div className='w-full h-[40vh] md:h-[60vh] grow mb-2'>
-        <ModuleBox>
-          {renderScene}
-        </ModuleBox>
+        <div className='max-lg:w-full lg:w-1/2 max-lg:h-[40vh] lg:max-h-full grow max-lg:mb-2 mt-2 overflow-hidden rounded-xs'>
+          <ModuleBox>
+            {renderScene}
+          </ModuleBox>
+        </div>
       </div>
 
       <Transition show={isOpen} afterLeave={() => setIsFinishedOpening(false)} afterEnter={() => setIsFinishedOpening(true)}>
-        <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] w-[17vh] h-[17vh] min-h-fit min-w-fit bg-background rounded-xs flex flex-col items-center justify-center px-4 py-2 mb-2 overflow-hidden`}>
+        <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] max-lg:w-[10vh] max-lg:h-[10vh] lg:h-[15rem] lg:w-[15rem] min-h-fit min-w-fit bg-background rounded-xs flex flex-col items-center justify-center px-4 py-2 max-lg:mb-2 overflow-hidden`}>
             {labels.map((label) => (
               <Button
                 key={label}

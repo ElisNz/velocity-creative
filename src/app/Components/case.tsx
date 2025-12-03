@@ -17,7 +17,7 @@ export default function Case(props?: any) {
           </section>
           <div className="flex h-fit w-full justify-start mb-2">
             <button onClick={() => window.history.replaceState(null, '', '/work')} title="back" type="button" className="w-fit h-full z-50">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 40 20" stroke="red" strokeWidth="2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 40 20" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="square" strokeLinejoin="bevel" d="M15 19l-7-7 7-7"/>
             </svg>
             </button>
