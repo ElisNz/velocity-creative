@@ -31,21 +31,24 @@ export default function Work(props?: any) {
   const showCase = !scenes.includes(pathname.split('/').pop() as scene) && pathname !== '/';
 
   const WorkCover = ({ title, coverImageUrl }: { title: string, coverImageUrl: string }) => (
-    <div onClick={() => window.history.replaceState(null, '', encodeURIComponent(title))} className="relative w-full h-[45vh] lg:h-[50vh] overflow-hidden rounded-xs group cursor-pointer z-50">
-      <Image
-        src={coverImageUrl}
-        alt={title}
-        fill
-        className="object-cover transform transition-all duration-500 z-10"
-      />
+    <div onClick={() => window.history.replaceState(null, '', encodeURIComponent(title))} className="relative flex flex-col w-full h-[70vh] lg:h-[70vh] overflow-hidden rounded-xs group cursor-pointer z-50">
+      <h3 className='uppercase rounded-xs'>{title}</h3>
+      <div className='relative w-full h-full'>
+        <Image
+          src={coverImageUrl}
+          alt={title}
+          fill
+          className="object-cover transform transition-all duration-500 z-10"
+        />
+      </div>
       <div className="absolute size-full flex items-center justify-center z-50">
-        <h1 className='uppercase bg-black/40 text-center capitalize p-4 rounded-xs text-white'>{title}</h1>
+        {/* <h1 className='uppercase bg-background text-center capitalize p-4 rounded-xs'>{title}</h1> */}
       </div>
     </div>
   );
 
   return (
-    <div className="w-full h-fit flex flex-col items-center justify-center gap-2">
+    <div className="w-full h-fit flex flex-col items-center justify-center gap-[2rem]">
       {showWorkCovers &&
         work.map(({ title, coverImageUrl }) => 
           <WorkCover key={title} title={title} coverImageUrl={coverImageUrl} />
