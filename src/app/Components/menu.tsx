@@ -127,7 +127,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
 
       <div className='w-full flex flex-col grow max-h-[90vh]'>
         <a title='home' href='/' className='w-full md:w-fit'>
-          <h1 className="lg:h-[4rem] rounded-xs text-foreground align-middle select-none lg:w-fit text-center max-md:align-middle uppercase max-md:self-center md:self-start bg-background py-2 px-4 md:px-8 text-nowrap">Velocity Creative</h1>
+          <h1 className="lg:h-[4rem] rounded-xs text-foreground align-middle select-none md:w-fit text-center max-md:align-middle uppercase max-md:self-center md:self-start bg-background py-2 px-4 md:px-8 text-nowrap">Velocity Creative</h1>
         </a>
 
         <div className='max-lg:w-full lg:w-1/2 max-lg:h-[40vh] lg:max-h-full grow max-lg:mb-2 mt-2 overflow-hidden rounded-xs'>

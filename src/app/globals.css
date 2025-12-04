@@ -76,7 +76,7 @@ h1 {
   font-weight: 800;
 }
 h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 800;
   line-height: 1;
 }
@@ -113,6 +113,22 @@ strong {
     font-size: 1.125rem;
     font-weight: 400;
   }
+}
+
+@media screen and (min-width: 2000px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 5rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.25rem;
+  }
+  
 }
 
 button:hover {
