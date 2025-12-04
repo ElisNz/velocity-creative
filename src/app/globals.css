@@ -26,12 +26,13 @@
   --font-mono: var(--font-lato);
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #ff2fd2;
+    --foreground-secondary: #ff2fd227;
+    --background: #c8dce8;
   }
-} */
+}
 
 @font-face {
   font-family: 'Frick';
