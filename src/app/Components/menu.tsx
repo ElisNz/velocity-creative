@@ -139,7 +139,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
 
       <div className='flex max-lg:flex-col lg:flex-col-reverse lg:justify-end lg:items-end'>
         <Transition show={isOpen} afterLeave={() => setIsFinishedOpening(false)} afterEnter={() => setIsFinishedOpening(true)}>
-          <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] min-w-fit w-[10vh] min-h-fit h-[10vh] lg:h-[10rem] lg:w-[10rem] bg-background rounded-xs flex flex-col items-center justify-center px-4 py-2 max-lg:mb-2 lg:mt-2 overflow-hidden`}>
+          <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] min-w-fit w-[15vh] min-h-fit h-[15vh] lg:h-[10rem] lg:w-[10rem] bg-background rounded-xs flex flex-col items-center justify-center px-4 py-2 max-lg:mb-2 lg:mt-2 overflow-hidden`}>
               {labels.map((label) => (
                 <Button
                   key={label}
