@@ -7,11 +7,13 @@
 :root {
   --background: #FFFFFF;
   --foreground: #FF0000;
+  --foreground-secondary: #ff00003e;
 }
 
 @media screen and (min-width: 640px) {
   :root {
     --foreground: #ff2fd2;
+    --foreground-secondary: #ff2fd227;
     --background: #c8dce8;
     
   }
@@ -139,20 +141,15 @@ button:hover {
 }
 
 .scrollbar-background {
-  scrollbar-width: 1rem;
+  scrollbar-width: 0.5rem;
   scrollbar-color: var(--foreground);
   border-radius: 0px;
 }
-
 .scrollbar-background::-webkit-scrollbar {
-  width: 1rem;
-  background: var(--foreground);
+  width: 0.5rem;
+  background: var(--foreground-secondary);
 }
 .scrollbar-background::-webkit-scrollbar-thumb {
-  background: var(--foreground);
-  border-radius: 0px;
-}
-.scrollbar-background::-webkit-scrollbar-track {
   background: var(--foreground);
   border-radius: 0px;
 }

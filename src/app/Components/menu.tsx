@@ -37,7 +37,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
     <Transition show={isModuleVisible && isFinishedOpening} appear>
       <div className='w-full h-full transition-all duration-300 data-transition:mb-0 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] w-full px-2 py-4 mb-2 bg-background overflow-hidden'>
       
-        <div className="w-full h-full rounded-xs pl-2 pr-3 overflow-y-auto scrollbar-foreground ">
+        <div className="w-full h-full rounded-xs pl-2 pr-3 overflow-y-auto scrollbar-background ">
           {/* <button
             type="button"
             title='Menu Button'
