@@ -6,8 +6,7 @@ import Image from 'next/image';
 import { workItem } from '../types';
 
 import { Case } from './';
-import { scene, scenes } from '../types';
-import { set } from 'mongoose';
+
 
 const work: workItem[] = [
   {
