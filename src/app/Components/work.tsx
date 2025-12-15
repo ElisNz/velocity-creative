@@ -1,15 +1,18 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-
+import { workItem } from '../types';
 
 import { Case } from './';
 import { scene, scenes } from '../types';
+import { set } from 'mongoose';
 
-const work = [
+const work: workItem[] = [
   {
     title: 'mannheimer swartling',
+    tags: ['photo', 'ai', 'corporate'],
     description: 'Description for project one.',
     coverImageUrl: '/work/mannheimer-swartling/JOACHIM_LUNDGREN_E9A0812-Edit.jpg',
   },
@@ -28,10 +31,17 @@ const work = [
 export default function Work(props?: any) {
   const pathname = usePathname();
   const showWorkCovers = pathname === '/work';
-  const showCase = !scenes.includes(pathname.split('/').pop() as scene) && pathname !== '/';
+  const [selectedWork, setSelectedWork] = useState<workItem | null>(null);
+  const [showCase, setShowCase] = useState<boolean>(false);
+
+  const onCoverClick = (title: string) => {
+    window.history.replaceState(null, '', encodeURIComponent(title));
+    setSelectedWork(work.find(item => item.title === title) || null);
+    setShowCase(true);
+  };
 
   const WorkCover = ({ title, coverImageUrl }: { title: string, coverImageUrl: string }) => (
-    <div onClick={() => window.history.replaceState(null, '', encodeURIComponent(title))} className="relative flex flex-col w-full h-[70vh] lg:h-[70vh] overflow-hidden rounded-xs group cursor-pointer z-50">
+    <div onClick={() => onCoverClick(title)} className="relative flex flex-col w-full h-[70vh] lg:h-[70vh] overflow-hidden rounded-xs group cursor-pointer z-50">
       <h3 className='uppercase rounded-xs'>{title}</h3>
       <div className='relative w-full h-full'>
         <Image
@@ -47,6 +57,20 @@ export default function Work(props?: any) {
     </div>
   );
 
+  useEffect(() => {
+    const caseName = decodeURI(pathname.split('/').pop() || '');
+    if (caseName && caseName !== 'work') {
+      const foundWork = work.find(item => item.title === caseName);
+      if (foundWork) {
+        setSelectedWork(foundWork);
+        setShowCase(true);
+      }
+    } else {
+      setShowCase(false);
+      setSelectedWork(null);
+    }
+  }, [pathname]);
+
   return (
     <div className="w-full h-fit flex flex-col items-center justify-center gap-[2rem]">
       {showWorkCovers &&
@@ -55,8 +79,8 @@ export default function Work(props?: any) {
         )
       }
       
-      {showCase &&
-        <Case />
+      {showCase && 
+        <Case props={selectedWork} />
       }
 
     </div>

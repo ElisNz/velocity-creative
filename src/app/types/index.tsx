@@ -19,3 +19,10 @@ export interface HeaderProps {
   currentScene: scene;
   setScene: setScene;
 };
+
+export type workItem = {
+  title: string;
+  tags?: string[];
+  description: string;
+  coverImageUrl: string;
+};
