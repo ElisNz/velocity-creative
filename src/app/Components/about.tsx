@@ -3,9 +3,10 @@ export default function About() {
     <>
       <section>
         <h2 className="mb-[1rem] uppercase">REDEFINING STRATEGIC BRANDING</h2>
-        <p>Drawing on over 25 years of experience in photography, design, strategic communication, and journalism, we blend the art of traditional image-making with the transformative power of AI.
-          Our expertise allows us to craft compelling visuals—whether captured through the lens of a camera or created with advanced generative tools.
-            With a global perspective and deep industry insight, we create imagery and creative solutions that unite classic craftsmanship with the possibilities of emerging technology.
+        <p>Velocity Creative is a global visual agency working at the intersection of photography, strategic design, and generative AI. 
+          We create concept-driven visuals, combining traditional craft with advanced AI tools to build next-generation visual storytelling. 
+          Backed by 25 years of experience with leading international brands, we work across industries to produce intelligent, high-quality imagery that resonates. 
+          We challenge conventions, expand creative possibilities, and shape a new visual culture. Our background includes work for brands such as IKEA, SEB, Electrolux, SAS, United Airlines, Skanska, The Economist, and the Financial Times.
         </p>
       </section>
       <section>
@@ -18,3 +19,4 @@ export default function About() {
     </>
   );
 };
+
