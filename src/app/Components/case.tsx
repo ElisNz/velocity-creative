@@ -35,6 +35,7 @@ export default function Case({ props }: any) {
           <Image
             src={`/work/mannheimer-swartling/JOACHIM_LUNDGREN_E9A0812-Edit.jpg`}
             alt={caseName}
+            quality={100}
             height={800}
             width={1200}
             className="object-fit transform transition-all duration-500 z-10"
@@ -44,6 +45,7 @@ export default function Case({ props }: any) {
           <Image
             src={`/work/seb/JOACHIM_LUNDGREN_E9A0565-Edit.jpg`}
             alt={caseName}
+            quality={100}
             height={800}
             width={1200}
             className="object-fit transform transition-all duration-500 z-10"
@@ -53,6 +55,7 @@ export default function Case({ props }: any) {
           <Image
             src={`/work/mannheimer-swartling/JOACHIM_LUNDGREN_E9A0812-Edit.jpg`}
             alt={caseName}
+            quality={100}
             height={800}
             width={1200}
             className="object-fit transform transition-all duration-500 z-10"
