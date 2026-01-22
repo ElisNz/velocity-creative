@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { Transition } from '@headlessui/react';
 
+import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { About, Work, Contact } from '.';
 
@@ -25,6 +26,8 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
   };
 
   const handleNavigation = (scene: scene) => {
+    if (scene === currentScene) { return; }
+    
     window.history.replaceState(null, '', `/${scene}`);
     setCurrentScene(scene);
   };
@@ -126,9 +129,9 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
     <hgroup className="absolute w-full h-full flex max-lg:flex-col justify-between p-4 md:p-8 z-50 gap-x-2">
 
       <div className='w-full flex flex-col grow max-h-[90vh]'>
-        <a title='home' href='/' className='w-full md:w-fit'>
+        <Link title='home' href='/' className='w-full md:w-fit'>
           <h1 className="lg:h-[4rem] rounded-xs text-foreground align-middle select-none md:w-fit text-center max-md:align-middle uppercase max-md:self-center md:self-start bg-background py-2 px-4 md:px-8 text-nowrap">Velocity Creative</h1>
-        </a>
+        </Link>
 
         <div className='max-lg:w-full lg:w-1/2 max-lg:h-[40vh] lg:max-h-full grow max-lg:mb-2 mt-2 overflow-hidden rounded-xs'>
           <ModuleBox>
