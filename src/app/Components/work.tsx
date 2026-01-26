@@ -27,11 +27,42 @@ const work: workItem[] = [
   },
 ];
 
-export default function Work(props?: any) {
+type Item = { pathname: string; image: string };
+
+type BlobItem = { pathname: string; url: string };
+
+type Grouped = Record<string, string[]>;
+
+function groupBySecondPath(items: Item[]): Grouped {
+  return items.reduce<Grouped>((acc, item) => {
+    const parts = item.pathname.split("/").filter(Boolean);
+    const key = parts[1] ?? "unknown";
+
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+
+    acc[key].push(item.image);
+    return acc;
+  }, {});
+}
+
+export default function Work({ props } : {props?: { blobs?: BlobItem[] }}) {
   const pathname = usePathname();
   const showWorkCovers = pathname === '/work';
   const [selectedWork, setSelectedWork] = useState<workItem | null>(null);
   const [showCase, setShowCase] = useState<boolean>(false);
+
+  const { blobs } = props || {};
+
+  const imageList = groupBySecondPath(
+    blobs?.map((blob: BlobItem) => ({
+      pathname: blob.pathname,
+      image: blob.url,
+    })) || []
+  );
+
+  const activeCaseImages = selectedWork ? imageList[selectedWork.title.replace(' ', '-')] || [] : [];
 
   const onCoverClick = (title: string) => {
     window.history.replaceState(null, '', encodeURIComponent(title));
@@ -78,8 +109,8 @@ export default function Work(props?: any) {
         )
       }
       
-      {showCase && 
-        <Case props={selectedWork} />
+      {showCase && selectedWork &&
+        <Case tags={selectedWork.tags ?? []} images={activeCaseImages} />
       }
 
     </div>

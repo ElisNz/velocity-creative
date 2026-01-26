@@ -9,6 +9,11 @@ export enum StatusCodes {
   BadRequest = 400
 };
 
+export type BlobItem = {
+  pathname: string;
+  url: string;
+};
+
 export type setScene = (scene: scene) => void;
 
 export interface SceneProps {

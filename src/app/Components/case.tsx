@@ -2,13 +2,12 @@
 
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { Suspense } from "react";
 
 
-export default function Case({ props }: any) {
+export default function Case({ tags, images }: { tags: string[], images: string[]}) {
   const path = usePathname();
   const caseName = decodeURI(path.split('/').pop() || '');
-
-  const { tags } = props;
 
   return (
       <div className="w-full h-fit flex flex-col items-center justify-center gap-4">
@@ -31,36 +30,24 @@ export default function Case({ props }: any) {
             </button>
           </div>
         
-        <div className="relative overflow-hidden rounded-xs group cursor-pointer z-50">
-          <Image
-            src={`/work/mannheimer-swartling/JOACHIM_LUNDGREN_E9A0812-Edit.jpg`}
-            alt={caseName}
-            quality={100}
-            height={800}
-            width={1200}
-            className="object-fit transform transition-all duration-500 z-10"
-          />
-        </div>
-        <div className="relative overflow-hidden rounded-xs group cursor-pointer z-50">
-          <Image
-            src={`/work/seb/JOACHIM_LUNDGREN_E9A0565-Edit.jpg`}
-            alt={caseName}
-            quality={100}
-            height={800}
-            width={1200}
-            className="object-fit transform transition-all duration-500 z-10"
-          />
-        </div>
-        <div className="relative overflow-hidden rounded-xs group cursor-pointer z-50">
-          <Image
-            src={`/work/mannheimer-swartling/JOACHIM_LUNDGREN_E9A0812-Edit.jpg`}
-            alt={caseName}
-            quality={100}
-            height={800}
-            width={1200}
-            className="object-fit transform transition-all duration-500 z-10"
-          />
-        </div>
+        <Suspense>
+          <div className="w-full h-fit relative overflow-hidden rounded-xs group cursor-pointer z-50">
+            {
+              images?.map((src, key) => 
+                <div key={key} className="relative h-full w-full overflow-hidden rounded-xs group cursor-pointer z-50">
+                  <Image                 
+                    src={src}
+                    alt={caseName}
+                    quality={75}
+                    height={800}
+                    width={1200}
+                    className="object-fit transform transition-all duration-500 z-10"
+                  />
+                </div>
+              )
+            }
+          </div>
+        </Suspense>
 
       </div>
   );

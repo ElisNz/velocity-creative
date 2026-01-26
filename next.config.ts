@@ -5,6 +5,12 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       new URL(process.env.BLOB_STORAGE_URL || "https://w5nf8fhejxyus9xc.public.blob.vercel-storage.com/SHOWREEL_SKISS%2004_3.mp4"),
+      {
+        protocol: 'https',
+        hostname: 'w5nf8fhejxyus9xc.public.blob.vercel-storage.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

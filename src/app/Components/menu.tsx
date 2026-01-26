@@ -1,70 +1,16 @@
 'use client';
 
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useLayoutEffect } from 'react';
 import { Transition } from '@headlessui/react';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { About, Work, Contact } from '.';
 
-import { scene, scenes } from '../types';
+import { scene, scenes, BlobItem } from '../types';
 import './menu.css';
 
-
-export default function Menu({ imagePromise }: { imagePromise?: any }) {
-  const [currentScene, setCurrentScene] = useState<scene>('menu');
-  const [isOpen, setIsOpen] = useState(false);
-  const [isFinishedOpening, setIsFinishedOpening] = useState(false);
-
-  const labels = ['About', 'Work', 'Contact'];
-  const isModuleVisible = useMemo(() => currentScene !== 'menu' && isOpen, [currentScene, isOpen]);
-  const pathname = usePathname();
-  const router = useRouter();
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleNavigation = (scene: scene) => {
-    if (scene === currentScene) { return; }
-    
-    window.history.replaceState(null, '', `/${scene}`);
-    setCurrentScene(scene);
-  };
-
-  const Button = ({label, onClick}: {label: string, onClick: () => void}) => (
-      <button type='button' onClick={onClick} className='w-full'><h3 className={`${currentScene === label.toLowerCase() ? 'text-[#FF0000]/50 italic': ''}  uppercase w-full text-left mb-0`}>{label}</h3></button>
-  );
-
-  const ModuleBox = useCallback(({children}: {children: React.ReactNode}) => (
-    <Transition show={isModuleVisible && isFinishedOpening} appear>
-      <div className='w-full h-full transition-all duration-300 data-transition:mb-0 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] w-full px-2 py-4 mb-2 bg-background overflow-hidden'>
-      
-        <div className="w-full h-full rounded-xs pl-2 pr-3 overflow-y-auto scrollbar-background ">
-          {/* <button
-            type="button"
-            title='Menu Button'
-            onClick={handleNavigation.bind(null, 'menu')}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-10 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.5}
-            >
-              <path strokeLinecap="square" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button> */}
-          {children}
-        </div>
-      
-    </div>
-    </Transition>
-  ), [isModuleVisible, handleNavigation]);
-
-  const MenuButton = useCallback(() => (
+  const MenuButton = ({toggleMenu, isOpen} : {toggleMenu: () => void, isOpen: boolean}) => (
     <button
       type="button"
       title="Menu Button"
@@ -97,23 +43,79 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
         </svg>
       )}
     </button>
-  ), [isOpen]);
+  );
+
+
+export default function Menu({ imagePromise }: { imagePromise?: { blobs?: BlobItem[] } }) {
+  const [currentScene, setCurrentScene] = useState<scene>('menu');
+  const [isOpen, setIsOpen] = useState(false);
+  const [isFinishedOpening, setIsFinishedOpening] = useState(false);
+
+  const labels = ['About', 'Work', 'Contact'];
+  const isModuleVisible = useMemo(() => currentScene !== 'menu' && isOpen, [currentScene, isOpen]);
+  const pathname = usePathname();
+
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleNavigation = (scene: scene) => {
+    if (scene === currentScene) { return; }
+    
+    window.history.replaceState(null, '', `/${scene}`);
+    setCurrentScene(scene);
+  };
+
+  const Button = ({label, onClick}: {label: string, onClick: () => void}) => (
+      <button type='button' onClick={onClick} className='w-full'><h3 className={`${currentScene === label.toLowerCase() ? 'text-[#FF0000]/50 italic': ''}  uppercase w-full text-left mb-0`}>{label}</h3></button>
+  );
 
   const renderScene = useMemo(() => {
     switch (currentScene) {
       case 'about':
         return <About />;
       case 'work':
-        return <Work />;
+        return <Work props={imagePromise} />;
       case 'contact':
         return <Contact />;
       default:
         return null;
     }
-  }, [currentScene]);
+  }, [currentScene, imagePromise]);
+
+  const ModuleBox = useCallback(() => {
+    return (
+    <Transition show={isModuleVisible && isFinishedOpening} appear>
+      <div className='w-full h-full transition-all duration-300 data-transition:mb-0 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] w-full px-2 py-4 mb-2 bg-background overflow-hidden'>
+      
+        <div className="w-full h-full rounded-xs pl-2 pr-3 overflow-y-auto scrollbar-background ">
+          {/* <button
+            type="button"
+            title='Menu Button'
+            onClick={handleNavigation.bind(null, 'menu')}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="size-10 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path strokeLinecap="square" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button> */}
+          {/* {children} */}
+          {renderScene}
+        </div>
+      
+    </div>
+    </Transition>)
+  }, [isModuleVisible, handleNavigation, isFinishedOpening]);
 
   
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (pathname === '/') { return; }
 
     if (scenes.includes(pathname.split('/').pop() as scene)){
@@ -134,9 +136,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
         </Link>
 
         <div className='max-lg:w-full lg:w-1/2 max-lg:h-[40vh] lg:max-h-full grow max-lg:mb-2 mt-2 overflow-hidden rounded-xs'>
-          <ModuleBox>
-            {renderScene}
-          </ModuleBox>
+          <ModuleBox />
         </div>
       </div>
 
@@ -155,7 +155,7 @@ export default function Menu({ imagePromise }: { imagePromise?: any }) {
           </nav>
         </Transition>
 
-        <MenuButton />
+        <MenuButton toggleMenu={toggleMenu} isOpen={isOpen} />
       </div>
  
     </hgroup>

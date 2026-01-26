@@ -1,12 +1,14 @@
-// import { list } from '@vercel/blob';
+
+import { list } from '@vercel/blob';
 import { Menu, Showreel } from '../Components';
 
-export default function Home() {
-  // const imageList = list({ token: process.env.BLOB_STORAGE_READ_TOKEN || '', prefix: 'WORK' });
+
+export default async function Home() {
+  const imageList = await list({ token: process.env.BLOB_STORAGE_READ_TOKEN || '', mode: 'expanded', prefix: 'work/' });
 
   return (
       <main className="h-full w-full">
-        <Menu /* imagePromise={imageList} */ />
+        <Menu imagePromise={imageList} />
         <Showreel />
       </main>
   );
