@@ -23,7 +23,7 @@ export default function Case({ tags, images }: { tags: string[], images: string[
           </section>
           <div className="flex h-fit w-full justify-start">
             <button onClick={() => window.history.replaceState(null, '', '/work')} title="back" type="button" className="flex items-center w-fit h-full z-50">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="none" viewBox="fit" stroke="currentColor" strokeWidth="2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="none" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="square" strokeLinejoin="bevel" d="M15 19l-7-7 7-7"/>
               </svg>
               <p className="w-fit">All Works</p>
@@ -37,10 +37,12 @@ export default function Case({ tags, images }: { tags: string[], images: string[
                 <div key={key} className="relative h-full w-full overflow-hidden rounded-xs group cursor-pointer z-50">
                   <Image                 
                     src={src}
+                    priority
+                    loading="eager"
                     alt={caseName}
                     quality={75}
                     height={800}
-                    width={1200}
+                    width={800}
                     className="object-fit transform transition-all duration-500 z-10"
                   />
                 </div>

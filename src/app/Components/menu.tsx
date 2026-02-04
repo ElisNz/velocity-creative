@@ -112,7 +112,7 @@ export default function Menu({ imagePromise }: { imagePromise?: { blobs?: BlobIt
       
     </div>
     </Transition>)
-  }, [isModuleVisible, handleNavigation, isFinishedOpening]);
+  }, [isModuleVisible, isFinishedOpening, renderScene]);
 
   
   useLayoutEffect(() => {

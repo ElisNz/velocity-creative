@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { workItem } from '../types';
 
@@ -33,8 +33,13 @@ type BlobItem = { pathname: string; url: string };
 
 type Grouped = Record<string, string[]>;
 
+const re = /\.(?:png|jpe?g|gif|webp|svg|avif|bmp|tiff?)$/i;
+
 function groupBySecondPath(items: Item[]): Grouped {
   return items.reduce<Grouped>((acc, item) => {
+    if (!re.test(item.image)) {
+      return acc;
+    }
     const parts = item.pathname.split("/").filter(Boolean);
     const key = parts[1] ?? "unknown";
 
@@ -47,7 +52,7 @@ function groupBySecondPath(items: Item[]): Grouped {
   }, {});
 }
 
-export default function Work({ props } : {props?: { blobs?: BlobItem[] }}) {
+export default function Work({ props } : { props?: { blobs?: BlobItem[] } }) {
   const pathname = usePathname();
   const showWorkCovers = pathname === '/work';
   const [selectedWork, setSelectedWork] = useState<workItem | null>(null);
@@ -55,12 +60,13 @@ export default function Work({ props } : {props?: { blobs?: BlobItem[] }}) {
 
   const { blobs } = props || {};
 
-  const imageList = groupBySecondPath(
+  const imageList = useMemo(() => groupBySecondPath(
     blobs?.map((blob: BlobItem) => ({
       pathname: blob.pathname,
       image: blob.url,
     })) || []
-  );
+  ), [blobs]);
+  console.log(imageList);
 
   const activeCaseImages = selectedWork ? imageList[selectedWork.title.replace(' ', '-')] || [] : [];
 
@@ -78,6 +84,8 @@ export default function Work({ props } : {props?: { blobs?: BlobItem[] }}) {
           src={coverImageUrl}
           alt={title}
           fill
+          quality={75}
+          loading='lazy'
           className="object-cover transform transition-all duration-500 z-10"
         />
       </div>
