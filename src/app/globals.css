@@ -93,16 +93,20 @@ strong {
     font-size: 2rem;
   }
   h2 {
-    font-size: 4rem;
-    font-weight: 800;
+    font-size: 7rem;
+    font-weight: 700;
   }
   h3 {
     font-size: 1.75rem;
-    font-weight: 800;
+    font-weight: 700;
   }
   p {
     font-size: 1.125rem;
     font-weight: 400;
+  }
+  strong {
+    font-size: larger;
+    font-weight: 700;
   }
 }
 
@@ -111,13 +115,19 @@ strong {
     font-size: 2.5rem;
   }
   h2 {
-    font-size: 5rem;
+    font-size: 8rem;
+    font-weight: 800;
   }
   h3 {
     font-size: 2rem;
+    font-weight: 800;
   }
   p {
     font-size: 1.25rem;
+  }
+  strong {
+    font-size: larger;
+    font-weight: 700;
   }
   
 }

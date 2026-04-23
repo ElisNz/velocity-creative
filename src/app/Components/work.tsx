@@ -11,7 +11,7 @@ import { Case } from './';
 const work: workItem[] = [
   {
     title: 'mannheimer swartling',
-    tags: ['photo', 'ai', 'corporate'],
+    tags: ['photo', 'ai'],
     description: 'Description for project one.',
     coverImageUrl: '/work/mannheimer-swartling/JOACHIM_LUNDGREN_E9A0812-Edit.jpg',
   },
