@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback, useLayoutEffect } from 'react';
+import { useState, useMemo, JSX } from 'react';
 import { Transition } from '@headlessui/react';
 
 import Link from 'next/link';
@@ -9,6 +9,7 @@ import { About, Work, Contact } from '.';
 
 import { scene, scenes, BlobItem } from '../types';
 import './menu.css';
+
 
   const MenuButton = ({toggleMenu, isOpen} : {toggleMenu: () => void, isOpen: boolean}) => (
     <button
@@ -45,16 +46,42 @@ import './menu.css';
     </button>
   );
 
+    const ModuleBox = ({ isModuleVisible, isFinishedOpening, renderScene }: { isModuleVisible: boolean, isFinishedOpening: boolean, renderScene: JSX.Element | null }) => {
+
+      return (
+        <Transition show={isModuleVisible && isFinishedOpening} appear>
+          <div className='w-full h-full transition-all duration-300 data-transition:mb-0 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] w-full px-2 py-4 mb-2 bg-background overflow-hidden'>
+          
+            <div className="w-full h-full rounded-xs pl-2 pr-3 overflow-y-auto scrollbar-background ">
+              <Transition show={true}>
+                <div className={`transition-all duration-300 data-transition:opacity-50 data-closed:opacity-0`}>
+                  {renderScene}
+                </div>
+              </Transition>
+            </div>
+          
+        </div>
+        </Transition>
+      );
+    };
+
+    const getInitialScene = (pathname: string): scene => {
+      if (pathname === '/') return 'menu';
+      const segment = pathname.split('/').pop() as scene;
+      return scenes.includes(segment) ? segment : 'work';
+    };
+
+    const getInitialOpen = (pathname: string): boolean => pathname !== '/';
+
 
 export default function Menu({ imagePromise }: { imagePromise?: { blobs?: BlobItem[] } }) {
-  const [currentScene, setCurrentScene] = useState<scene>('menu');
-  const [isOpen, setIsOpen] = useState(false);
-  const [isFinishedOpening, setIsFinishedOpening] = useState(false);
+  const pathname = usePathname();
+  const [currentScene, setCurrentScene] = useState<scene>(() => getInitialScene(pathname));
+  const [isOpen, setIsOpen] = useState<boolean>(() => getInitialOpen(pathname));
+  const [isFinishedOpening, setIsFinishedOpening] = useState<boolean>(() => getInitialOpen(pathname));
 
   const labels = ['About', 'Work', 'Contact'];
   const isModuleVisible = useMemo(() => currentScene !== 'menu' && isOpen, [currentScene, isOpen]);
-  const pathname = usePathname();
-
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -84,51 +111,9 @@ export default function Menu({ imagePromise }: { imagePromise?: { blobs?: BlobIt
     }
   }, [currentScene, imagePromise]);
 
-  const ModuleBox = useCallback(() => {
-    return (
-    <Transition show={isModuleVisible && isFinishedOpening} appear>
-      <div className='w-full h-full transition-all duration-300 data-transition:mb-0 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] w-full px-2 py-4 mb-2 bg-background overflow-hidden'>
-      
-        <div className="w-full h-full rounded-xs pl-2 pr-3 overflow-y-auto scrollbar-background ">
-          {/* <button
-            type="button"
-            title='Menu Button'
-            onClick={handleNavigation.bind(null, 'menu')}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-10 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.5}
-            >
-              <path strokeLinecap="square" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button> */}
-          {/* {children} */}
-          {renderScene}
-        </div>
-      
-    </div>
-    </Transition>)
-  }, [isModuleVisible, isFinishedOpening, renderScene]);
-
-  
-  useLayoutEffect(() => {
-    if (pathname === '/') { return; }
-
-    if (scenes.includes(pathname.split('/').pop() as scene)){
-      setCurrentScene(pathname.split('/').pop() as scene);
-    } else {
-      setCurrentScene('work');
-    }
-
-    setIsOpen(true);
-  }, []);
 
   return (
-    <hgroup className="absolute w-full h-full flex max-lg:flex-col justify-between p-4 md:p-8 z-50 gap-x-2">
+    <div className="absolute w-full h-full flex max-lg:flex-col justify-between p-4 md:p-8 z-50 gap-x-2">
 
       <div className='w-full flex flex-col grow max-h-[90vh]'>
         <Link title='home' href='/' className='w-full md:w-fit'>
@@ -136,7 +121,7 @@ export default function Menu({ imagePromise }: { imagePromise?: { blobs?: BlobIt
         </Link>
 
         <div className='max-lg:w-full lg:w-1/2 max-lg:h-[40vh] lg:max-h-full grow max-lg:mb-2 mt-2 overflow-hidden rounded-xs'>
-          <ModuleBox />
+          <ModuleBox isModuleVisible={isModuleVisible} isFinishedOpening={isFinishedOpening} renderScene={renderScene} />
         </div>
       </div>
 
@@ -158,6 +143,6 @@ export default function Menu({ imagePromise }: { imagePromise?: { blobs?: BlobIt
         <MenuButton toggleMenu={toggleMenu} isOpen={isOpen} />
       </div>
  
-    </hgroup>
+    </div>
   );
 };

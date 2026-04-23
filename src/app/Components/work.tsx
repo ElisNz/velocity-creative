@@ -66,7 +66,6 @@ export default function Work({ props } : { props?: { blobs?: BlobItem[] } }) {
       image: blob.url,
     })) || []
   ), [blobs]);
-  console.log(imageList);
 
   const activeCaseImages = selectedWork ? imageList[selectedWork.title.replace(' ', '-')] || [] : [];
 
