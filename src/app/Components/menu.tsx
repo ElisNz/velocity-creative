@@ -50,9 +50,9 @@ import './menu.css';
 
       return (
         <Transition show={isModuleVisible && isFinishedOpening} appear>
-          <div className='w-full h-full transition-all duration-300 data-transition:mb-0 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] w-full px-2 py-4 mb-2 bg-background overflow-hidden'>
+          <div className='h-full transition-all duration-300 data-transition:mb-0 data-closed:h-[0px] data-closed:opacity-0 data-transition:text-white/0 data-closed:w-[0px] w-full px-2 py-4 mb-2 bg-background overflow-hidden'>
           
-            <div className="w-full h-full rounded-xs pl-2 pr-3 overflow-y-auto scrollbar-background ">
+            <div className="h-full rounded-xs pl-2 pr-3 overflow-y-auto scrollbar-background ">
               <Transition show={true}>
                 <div className={`transition-all duration-300 data-transition:opacity-50 data-closed:opacity-0 p-4`}>
                   {renderScene}
@@ -111,16 +111,23 @@ export default function Menu({ imagePromise }: { imagePromise?: { blobs?: BlobIt
     }
   }, [currentScene, imagePromise]);
 
+  const moduleBoxSize = {
+    menu: 'w-full',
+    about: 'w-full',
+    work: 'w-2/3',
+    contact: 'w-1/3',
+  }
+
 
   return (
     <div className="absolute w-full h-full flex max-lg:flex-col justify-between p-4 md:p-8 z-50 gap-x-2">
 
-      <div className='w-full flex flex-col grow max-h-[90vh]'>
+      <div className='flex flex-col grow max-h-[90vh]'>
         <Link title='home' href='/' className='w-full md:w-fit'>
           <h1 className="lg:h-[4rem] rounded-xs text-foreground align-middle select-none md:w-fit text-center max-md:align-middle uppercase max-md:self-center md:self-start bg-background py-2 px-4 md:px-8 text-nowrap">Velocity Creative</h1>
         </Link>
 
-        <div className='max-lg:w-full lg:w-full max-lg:h-[40vh] lg:max-h-full grow max-lg:mb-2 mt-2 overflow-hidden rounded-xs'>
+        <div className={`${moduleBoxSize[currentScene]} max-lg:h-[40vh] lg:max-h-full grow max-lg:mb-2 mt-2 overflow-hidden rounded-xs`}>
           <ModuleBox isModuleVisible={isModuleVisible} isFinishedOpening={isFinishedOpening} renderScene={renderScene} />
         </div>
       </div>

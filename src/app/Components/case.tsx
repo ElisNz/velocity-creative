@@ -67,7 +67,7 @@ function ImageCarousel({ images, caseName }: { images: string[], caseName: strin
             type="button"
             title="Previous"
             onClick={prev}
-            className="fixed left-15 top-1/2 -translate-y-1/2 flex items-center justify-center size-[3rem] bg-background/70 hover:bg-background transition-colors rounded-xs z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center justify-center size-[3rem] bg-background/70 hover:bg-background transition-colors rounded-xs z-10"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path strokeLinecap="square" strokeLinejoin="bevel" d="M15 18l-6-6 6-6"/>
@@ -77,7 +77,7 @@ function ImageCarousel({ images, caseName }: { images: string[], caseName: strin
             type="button"
             title="Next"
             onClick={next}
-            className="fixed right-60 top-1/2 -translate-y-1/2 flex items-center justify-center size-[3rem] bg-background/70 hover:bg-background transition-colors rounded-xs z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center size-[3rem] bg-background/70 hover:bg-background transition-colors rounded-xs z-10"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path strokeLinecap="square" strokeLinejoin="bevel" d="M9 18l6-6-6-6"/>
