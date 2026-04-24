@@ -12,16 +12,24 @@ const work: workItem[] = [
   {
     title: 'mannheimer swartling',
     tags: ['photo', 'ai'],
-    description: 'Description for project one.',
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     coverImageUrl: '/work/mannheimer-swartling/JOACHIM_LUNDGREN_E9A0812-Edit.jpg',
   },
   {
     title: 'sas',
-    description: 'Description for project two.',
+    tags: ['photo', 'ai'],
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     coverImageUrl: '/work/sas/JOACHIM_LUNDGREN_MG_0640-Edit.jpg',
   },
   {
     title: 'seb',
+    tags: ['photo', 'ai'],
     description: 'Description for project three.',
     coverImageUrl: '/work/seb/JOACHIM_LUNDGREN_E9A0565-Edit.jpg',
   },
@@ -77,7 +85,7 @@ export default function Work({ props } : { props?: { blobs?: BlobItem[] } }) {
 
   const WorkCover = ({ title, coverImageUrl }: { title: string, coverImageUrl: string }) => (
     <div onClick={() => onCoverClick(title)} className="relative flex flex-col w-full h-[70vh] lg:h-[70vh] overflow-hidden rounded-xs group cursor-pointer z-50">
-      <h3 className='uppercase rounded-xs'>{title}</h3>
+      <h1 className='uppercase'>{title}</h1>
       <div className='relative w-full h-full'>
         <Image
           src={coverImageUrl}
@@ -117,7 +125,7 @@ export default function Work({ props } : { props?: { blobs?: BlobItem[] } }) {
       }
       
       {showCase && selectedWork &&
-        <Case tags={selectedWork.tags ?? []} images={activeCaseImages} />
+        <Case images={activeCaseImages} workInfo={selectedWork} />
       }
 
     </div>

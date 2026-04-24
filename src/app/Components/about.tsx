@@ -81,9 +81,9 @@ export default function About() {
         <h3>PAST CLIENTS</h3>
 
         <p>Our clients have included brands such as:</p>
-        <ul className="w-full text-center">
+        <ul>
           {clientList.map((client, index) => (
-            <li key={index}><p>{client}</p></li>
+            <li key={index}><h3>{client}</h3></li>
           ))}
         </ul>
       </section>

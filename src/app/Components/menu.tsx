@@ -54,7 +54,7 @@ import './menu.css';
           
             <div className="w-full h-full rounded-xs pl-2 pr-3 overflow-y-auto scrollbar-background ">
               <Transition show={true}>
-                <div className={`transition-all duration-300 data-transition:opacity-50 data-closed:opacity-0`}>
+                <div className={`transition-all duration-300 data-transition:opacity-50 data-closed:opacity-0 p-4`}>
                   {renderScene}
                 </div>
               </Transition>
