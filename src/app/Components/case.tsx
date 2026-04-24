@@ -39,12 +39,12 @@ function ImageCarousel({ images, caseName }: { images: string[], caseName: strin
         onPointerUp={onPointerUp}
       >
         <div
-          className="flex transition-transform duration-500 ease-in-out"
+          className="flex max-lg:flex-col gap-2 max-lg:items-center transition-transform duration-500 ease-in-out"
           data-offset={index}
           ref={(el) => { if (el) el.style.transform = `translateX(-${index * 100}%)`; }}
         >
           {images.map((src, i) => (
-            <div key={i} className="w-fit flex flex-col items-center relative shrink-0 overflow-y-hidden">
+            <div key={i} className="w-full flex flex-col relative shrink-0 overflow-y-hidden">
               <Image
                 src={src}
                 alt={`${caseName} ${i + 1}`}
@@ -62,7 +62,7 @@ function ImageCarousel({ images, caseName }: { images: string[], caseName: strin
       </div>
 
       {images.length > 1 && (
-        <>
+        <div className="max-lg:hidden">
           <button
             type="button"
             title="Previous"
@@ -83,7 +83,7 @@ function ImageCarousel({ images, caseName }: { images: string[], caseName: strin
               <path strokeLinecap="square" strokeLinejoin="bevel" d="M9 18l6-6-6-6"/>
             </svg>
           </button>
-        </>
+        </div>
       )}
     </div>
   );
