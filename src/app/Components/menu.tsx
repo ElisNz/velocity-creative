@@ -114,8 +114,8 @@ export default function Menu({ imagePromise }: { imagePromise?: { blobs?: BlobIt
   const moduleBoxSize = {
     menu: 'w-full',
     about: 'w-full',
-    work: 'w-2/3',
-    contact: 'w-1/3',
+    work: 'w-full',
+    contact: 'w-full',
   }
 
 
