@@ -2,89 +2,104 @@
 
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { workItem } from "../types";
 
-function ImageCarousel({ images, caseName }: { images: string[], caseName: string }) {
-  const [index, setIndex] = useState(0);
-  const dragStartX = useRef<number | null>(null);
-  const dragged = useRef(false);
+type ImageOrientation = 'landscape' | 'portrait' | 'unknown';
 
-  const prev = useCallback(() => setIndex(i => (i - 1 + images.length) % images.length), [images.length]);
-  const next = useCallback(() => setIndex(i => (i + 1) % images.length), [images.length]);
+type MosaicRow =
+  | { type: 'full'; src: string }
+  | { type: 'pair'; srcs: [string, string] }
+  | { type: 'solo-portrait'; src: string };
 
-  const onPointerDown = (e: React.PointerEvent) => {
-    dragStartX.current = e.clientX;
-    dragged.current = false;
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-  };
-
-  const onPointerUp = (e: React.PointerEvent) => {
-    if (dragStartX.current === null) return;
-    const delta = e.clientX - dragStartX.current;
-    if (Math.abs(delta) > 40) {
-      dragged.current = true;
-      if (delta < 0) { next(); } else { prev(); }
+function buildMosaicRows(images: string[], orientations: Record<string, ImageOrientation>): MosaicRow[] {
+  const rows: MosaicRow[] = [];
+  let i = 0;
+  while (i < images.length) {
+    const src = images[i];
+    const orientation = orientations[src] ?? 'unknown';
+    if (orientation === 'landscape') {
+      rows.push({ type: 'full', src });
+      i++;
+    } else if (orientation === 'portrait') {
+      const next = images[i + 1];
+      if (next && (orientations[next] === 'portrait' || orientations[next] === 'unknown')) {
+        rows.push({ type: 'pair', srcs: [src, next] });
+        i += 2;
+      } else {
+        rows.push({ type: 'solo-portrait', src });
+        i++;
+      }
+    } else {
+      // unknown — render full width as fallback
+      rows.push({ type: 'full', src });
+      i++;
     }
-    dragStartX.current = null;
-  };
+  }
+  return rows;
+}
 
-  if (!images.length) return null;
+function ImageMosaic({ images, caseName }: { images: string[], caseName: string }) {
+  const [orientations, setOrientations] = useState<Record<string, ImageOrientation>>({});
+
+  const onImageLoad = useCallback((src: string, naturalWidth: number, naturalHeight: number) => {
+    setOrientations(prev => ({
+      ...prev,
+      [src]: naturalWidth >= naturalHeight ? 'landscape' : 'portrait',
+    }));
+  }, []);
+
+  // Pre-load all images to detect orientation before rendering mosaic
+  useEffect(() => {
+    images.forEach(src => {
+      if (orientations[src]) return;
+      const img = new window.Image();
+      img.onload = () => onImageLoad(src, img.naturalWidth, img.naturalHeight);
+      img.src = src;
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [images]);
+
+  const allResolved = images.every(src => orientations[src]);
+  const rows = allResolved ? buildMosaicRows(images, orientations) : [];
 
   return (
-    <div className="relative w-full max-h-[90%] select-none">
-      <div
-        className="w-full overflow-hidden rounded-xs cursor-grab active:cursor-grabbing"
-        onPointerDown={onPointerDown}
-        onPointerUp={onPointerUp}
-      >
-        <div
-          className="flex max-lg:flex-col gap-2 max-lg:items-center transition-transform duration-500 ease-in-out"
-          data-offset={index}
-          ref={(el) => { if (el) el.style.transform = `translateX(-${index * 100}%)`; }}
-        >
-          {images.map((src, i) => (
-            <div key={i} className="w-full flex flex-col relative shrink-0 overflow-y-hidden">
+    <div className="w-full flex flex-col gap-8">
+      {rows.map((row, i) => {
+        if (row.type === 'full' || row.type === 'solo-portrait') {
+          return (
+            <div key={i} className="w-full">
               <Image
-                src={src}
+                src={row.src}
                 alt={`${caseName} ${i + 1}`}
                 width={1600}
                 height={1}
-                priority={i === 0}
-                loading={i === 0 ? 'eager' : 'lazy'}
-                quality={100}
-                className="w-full h-auto object-contain rounded-xs pointer-events-none"
+                quality={75}
+                loading="lazy"
+                className="w-full h-auto"
                 style={{ width: '100%', height: 'auto' }}
               />
             </div>
-          ))}
-        </div>
-      </div>
-
-      {images.length > 1 && (
-        <div className="max-lg:hidden">
-          <button
-            type="button"
-            title="Previous"
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center justify-center size-[3rem] bg-background/70 hover:bg-background transition-colors rounded-xs z-10"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path strokeLinecap="square" strokeLinejoin="bevel" d="M15 18l-6-6 6-6"/>
-            </svg>
-          </button>
-          <button
-            type="button"
-            title="Next"
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center size-[3rem] bg-background/70 hover:bg-background transition-colors rounded-xs z-10"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path strokeLinecap="square" strokeLinejoin="bevel" d="M9 18l6-6-6-6"/>
-            </svg>
-          </button>
-        </div>
-      )}
+          );
+        }
+        return (
+          <div key={i} className="w-full grid grid-cols-2 gap-8">
+            {row.srcs.map((src, j) => (
+              <Image
+                key={j}
+                src={src}
+                alt={`${caseName} ${i + 1}-${j + 1}`}
+                width={800}
+                height={1}
+                quality={75}
+                loading="lazy"
+                className="w-full h-auto"
+                style={{ width: '100%', height: 'auto' }}
+              />
+            ))}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -96,16 +111,32 @@ export default function Case({ images, workInfo }: { images: string[], workInfo:
 
   return (
       <div className="w-full h-fit flex flex-col gap-4">
-        
-          <section className="flex-1 gap-0 mb-0">
-            <h1 className="uppercase w-full text-left wrap-anywhere mb-2">{caseName}</h1>
-            {workInfo.tags && 
-              workInfo.tags.map((tag: string, index: number) =>
-                <span className="uppercase text-background bg-foreground font-black rounded-xs px-2 py-1 mr-2" key={index}>{tag}</span>
-              )
-            }
-            <p className="mb-[0px] mt-4 text-balance">{workInfo.description}</p>
-          </section>
+
+          <div className="w-full grid grid-cols-2 gap-4 max-lg:grid-cols-1">
+            <section className="flex flex-col h-full">
+              <div className="">
+                <h1 className="uppercase w-full text-left wrap-anywhere mb-2 self-start">{caseName}</h1>
+                <span className="self-start flex flex-wrap">
+                  {workInfo.tags && 
+                    workInfo.tags.map((tag: string, index: number) =>
+                      <span className="uppercase text-background bg-foreground font-black rounded-xs px-2 py-1 mr-2" key={index}>{tag}</span>
+                    )
+                  }
+                </span>
+              </div>
+              <p className="h-fit mb-[0px] mt-4 text-balance self-center">{workInfo.description}</p>
+            </section>
+
+            <Image
+              src={`${images[0]}`}
+              alt="Showreel Background"
+              height={1600}
+              width={1600}
+              loading='lazy'
+              quality={75}
+              className="object-cover"
+            />
+          </div>
 
           <div className="flex h-fit w-full justify-start">
             <button onClick={() => window.history.replaceState(null, '', '/work')} title="back" type="button" className="flex items-center w-fit h-full z-50">
@@ -116,8 +147,30 @@ export default function Case({ images, workInfo }: { images: string[], workInfo:
             </button>
           </div>
         
-        <ImageCarousel images={images ?? []} caseName={caseName} />
+        {/* <ImageCarousel images={images ?? []} caseName={caseName} /> */}
 
-      </div>
+        <div id="mosaic" className="max-lg:hidden">
+          <ImageMosaic images={images ?? []} caseName={caseName} />
+        </div>
+
+        <div id="mosaic-mobile" className="lg:hidden"></div>
+          {images.map((image, i) => {
+              return (
+                <div key={i} className="w-full">
+                  <Image
+                    src={image}
+                    alt={`${caseName} ${i + 1}`}
+                    width={1600}
+                    height={1}
+                    quality={75}
+                    loading="lazy"
+                    className="w-full h-auto"
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                </div>
+              );
+          })}
+        </div>
+
   );
 };

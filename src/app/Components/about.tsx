@@ -78,7 +78,7 @@ export default function About() {
         <strong>Do you also work with conventional photography and video?</strong>
         <p>Yes. We have over 30 years of experience working with photography across advertising, corporate and editorial contexts. We combine commissioned photography with generative methods where relevant, depending on the needs of each project.</p>
 
-        <h3>PAST CLIENTS</h3>
+        <h2>PAST CLIENTS</h2>
 
         <p>Our clients have included brands such as:</p>
         <ul>

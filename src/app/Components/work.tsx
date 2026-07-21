@@ -117,7 +117,7 @@ export default function Work({ props } : { props?: { blobs?: BlobItem[] } }) {
   }, [pathname]);
 
   return (
-    <div className={`w-full h-fit ${showWorkCovers ? 'grid grid-cols-2' : 'flex flex-col'} items-center justify-center gap-[2rem]`}>
+    <div className={`w-full h-fit ${showWorkCovers ? 'lg:grid grid-cols-2' : 'flex flex-col'} items-center justify-center gap-[2rem]`}>
       {showWorkCovers &&
         work.map(({ title, coverImageUrl }) => 
           <WorkCover key={title} title={title} coverImageUrl={coverImageUrl} />
