@@ -127,7 +127,7 @@ export default function Case({ images, workInfo }: { images: string[], workInfo:
               <p className="h-fit mb-[0px] mt-4 text-balance self-center">{workInfo.description}</p>
             </section>
 
-            <Image
+            {/* <Image
               src={`${images[0]}`}
               alt="Showreel Background"
               height={1600}
@@ -135,15 +135,15 @@ export default function Case({ images, workInfo }: { images: string[], workInfo:
               loading='lazy'
               quality={75}
               className="object-cover"
-            />
+            /> */}
           </div>
 
-          <div className="flex h-fit w-full justify-start">
-            <button onClick={() => window.history.replaceState(null, '', '/work')} title="back" type="button" className="flex items-center w-fit h-full z-50">
+          <div className="sticky top-5 flex h-20 w-fit justify-start z-50 items-center px-4">
+            <button onClick={() => window.history.replaceState(null, '', '/work')} title="back" type="button" className="flex items-center w-fit h-fit z-50">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="none" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="square" strokeLinejoin="bevel" d="M15 19l-7-7 7-7"/>
               </svg>
-              <p className="w-fit">All Works</p>
+              <p className="w-fit align-middle">All Works</p>
             </button>
           </div>
         
