@@ -120,7 +120,7 @@ export default function Menu({ imagePromise }: { imagePromise?: { blobs?: BlobIt
 
 
   return (
-    <div className="absolute w-full h-full flex max-lg:flex-col justify-between p-4 md:p-8 z-50 gap-x-2">
+    <div className="absolute w-full h-full flex max-lg:flex-col justify-between p-4 md:p-8 z-50">
 
       <div className='flex flex-col grow max-h-[90vh]'>
         <Link title='home' href='/' className='w-full md:w-fit'>
@@ -132,7 +132,7 @@ export default function Menu({ imagePromise }: { imagePromise?: { blobs?: BlobIt
         </div>
       </div>
 
-      <div className='flex max-lg:flex-col lg:flex-col-reverse lg:justify-end lg:items-end'>
+      <div className='flex max-lg:flex-col lg:flex-col-reverse lg:justify-end lg:items-end ml-2'>
         <Transition show={isOpen} afterLeave={() => setIsFinishedOpening(false)} afterEnter={() => setIsFinishedOpening(true)}>
           <nav className={`transition-all duration-300 data-closed:h-[0px] data-closed:opacity-0 data-closed:w-[0px] min-w-fit w-[15vh] min-h-fit h-[15vh] lg:h-[10rem] lg:w-[10rem] bg-background rounded-xs flex flex-col items-center justify-center px-4 py-2 max-lg:mb-2 lg:mt-2 overflow-hidden`}>
               {labels.map((label) => (
