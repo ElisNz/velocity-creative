@@ -5,13 +5,13 @@ export default function Contact() {
     <div className="max-h-full flex flex-col gap-8">
       <article>
         <h1>JOACHIM LUNDGREN</h1>
-        <h3 className="mb-4">Photographer</h3>
+        <h3 className="mb-4">Photographer / DOP / Strategist</h3>
         <p className="mb-[0rem] md:text-[1.5rem]">Tel: +46—0705—14 32 97</p>
         <a className="underline decoration-dashed">jl@velocity.ai</a>
       </article>
       <article>
         <h1>BENJAMIN MANDRE</h1>
-        <h3 className="mb-4">Promptographer</h3>
+        <h3 className="mb-4">Promptographer / CD / Strategist</h3>
         <p className="mb-[0rem] md:text-[1.5rem]">Tel: +46—0708—77 08 47</p>
         <a className="underline decoration-dashed">bm@velocity.ai</a>
       </article>
