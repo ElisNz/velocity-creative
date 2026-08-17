@@ -19,9 +19,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground: #ff2fd2;
-    --foreground-secondary: #ff2fd227;
-    --background: #c8dce8;
+    --foreground: #FF0000;
+    --foreground-secondary: #ff00003e;
+    --background: #080808;
   }
 }
 
@@ -78,7 +78,7 @@ h3 {
 }
 
 a {
-  color: rgb(0, 0, 0);
+  color: var(--foreground);
   font-size: 1rem;
   text-underline-offset: 0.5rem;
 }

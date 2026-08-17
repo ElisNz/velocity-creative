@@ -15,6 +15,20 @@ const lato = Lato({
 export const metadata: Metadata = {
   title: "Velocity Creative",
   description: "Velocity Creative",
+  icons: {
+    icon: [
+      {
+        media: '(prefers-color-scheme: light)',
+        url: '/icon-light.png',
+        href: '/Velocity_tab_red.png',
+      },
+      {
+        media: '(prefers-color-scheme: dark)',
+        url: '/icon.png',
+        href: '/Velocity_tab_blk.png',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
