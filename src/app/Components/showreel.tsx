@@ -5,7 +5,7 @@ import { list } from '@vercel/blob';
 import { StatusCodes } from "../types";
 import ShowreelVideo from "./showreel-video";
 
-const MOBILE_BREAKPOINT = 768;
+const MOBILE_BREAKPOINT = 1024;
 
 export default async function Showreel() {
   const videoList = await list({ token: process.env.BLOB_STORAGE_READ_TOKEN || '', prefix: 'SHOWREEL' });

@@ -9,12 +9,11 @@ interface ShowreelVideoProps {
 }
 
 function getUrl(mobileUrl: string, desktopUrl: string, breakpoint: number): string {
-  if (typeof window === 'undefined') return desktopUrl;
   return window.innerWidth < breakpoint ? mobileUrl : desktopUrl;
 }
 
-export default function ShowreelVideo({ mobileUrl, desktopUrl, breakpoint = 768 }: ShowreelVideoProps) {
-  const [src, setSrc] = useState<string>(() => getUrl(mobileUrl, desktopUrl, breakpoint));
+export default function ShowreelVideo({ mobileUrl, desktopUrl, breakpoint = 1024 }: ShowreelVideoProps) {
+  const [src, setSrc] = useState<string>('');
 
   useEffect(() => {
     const update = () => setSrc(getUrl(mobileUrl, desktopUrl, breakpoint));
