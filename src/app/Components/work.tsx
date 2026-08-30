@@ -10,11 +10,10 @@ import { Case } from './';
 
 const work: workItem[] = [
   {
-    title: 'mannheimer swartling',
+    title: 'afry',
     tags: ['photo', 'ai'],
-    description: `A collaboration with Scandinavia’s leading business law firm, spanning years and
-shaping a photographic visual identity while building a tailored image bank.`,
-    coverImageUrl: '/work/mannheimer-swartling/JOACHIM_LUNDGREN_E9A0812-Edit.jpg',
+    description: 'We teamed up with lighting designers at AFRY, a major international engineering and consulting group, to visualise an experimental façade lighting scheme in Rosengård, Malmö. The proposal secured the commission, and the project is now under construction.',
+    coverImageUrl: '/work/afry/velocity_afry_2.png',
   },
   {
     title: 'sas',
@@ -32,16 +31,23 @@ exclusive image bank.`,
     coverImageUrl: '/work/seb/JOACHIM_LUNDGREN_E9A0565-Edit.jpg',
   },
   {
-    title: 'afry',
-    tags: ['photo'],
-    description: 'We teamed up with lighting designers at AFRY, a major international engineering and consulting group, to visualise an experimental façade lighting scheme in Rosengård, Malmö. The proposal secured the commission, and the project is now under construction.',
-    coverImageUrl: '/work/afry/velocity_afry_2.png',
-  },
-  {
     title: 'brabo',
-    tags: ['photo'],
+    tags: ['photo', 'ai'],
     description: 'Long-term work with property developer Brabo, incorporating AI-based visualisation since 2024 to illustrate proposals and visions for future developments.',
     coverImageUrl: '/work/brabo/benjamin_m_httpss.mj.runDevQAClpvMQ_httpss.mj.runai2rJL9QbXw__e1fb4e29-c179-4ee3-b7a0-7b5c2044a4fe_1.png',
+  },
+  {
+    title: 'upplands väsby',
+    tags: ['photo', 'ai'],
+    description: 'AI-based visualisations and photography for property developer Brabo as part of their long-term partnership with Upplands Väsby municipality. The projects range from street environments and a small library to an activity park.',
+    coverImageUrl: '/work/upplands-vasby/velocity_UV_1.png',
+  },
+    {
+    title: 'mannheimer swartling',
+    tags: ['photo', 'ai'],
+    description: `A collaboration with Scandinavia’s leading business law firm, spanning years and
+      shaping a photographic visual identity while building a tailored image bank.`,
+    coverImageUrl: '/work/mannheimer-swartling/JOACHIM_LUNDGREN_E9A0812-Edit.jpg',
   },
 ];
 
@@ -135,7 +141,7 @@ export default function Work({ props } : { props?: { blobs?: BlobItem[] } }) {
       }
       
       {showCase && selectedWork &&
-        <Case images={activeCaseImages} workInfo={selectedWork} />
+        <Case images={activeCaseImages} workInfo={selectedWork} workList={work.map(item => item.title)} />
       }
 
     </div>
