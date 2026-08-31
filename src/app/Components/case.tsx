@@ -23,6 +23,7 @@ function ImageMosaic({ images, caseName }: { images: string[], caseName: string 
       {images.map((src, i) => {
         const orientation = orientations[src];
         const widthClass = orientation === 'portrait' ? 'w-[calc(50%-0.25rem)]' : 'w-full';
+        
         return (
           <div key={src} className={widthClass}>
             <Image
@@ -41,7 +42,7 @@ function ImageMosaic({ images, caseName }: { images: string[], caseName: string 
       })}
     </div>
   );
-}
+};
 
 
 export default function Case({ images, workInfo, workList }: { images: string[], workInfo: workItem, workList: string[] }) {
@@ -89,7 +90,7 @@ export default function Case({ images, workInfo, workList }: { images: string[],
           <ImageMosaic images={images ?? []} caseName={caseName} />
         </div>
 
-        <div id="mosaic-mobile" className="md:hidden"></div>
+        <div id="mosaic-mobile" className="md:hidden">
           {images.map((image, i) => {
               return (
                 <div key={i} className="w-full">
@@ -107,16 +108,17 @@ export default function Case({ images, workInfo, workList }: { images: string[],
               );
           })}
         </div>
-
-        <div className="max-[1024px]:hidden sticky top-5 flex h-20 w-fit justify-start z-50 items-center px-4">
-          <button onClick={() => window.history.replaceState(null, '', '/work')} title="back" type="button" className="flex items-center w-fit h-fit z-50">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="none" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="square" strokeLinejoin="bevel" d="M15 19l-7-7 7-7"/>
-            </svg>
-            <p className="w-fit align-middle font-black">Back</p>
-          </button>
-        </div>
-
       </div>
+
+      <div className="max-[1024px]:hidden sticky top-5 flex h-20 w-fit justify-start z-50 items-center px-4">
+        <button onClick={() => window.history.replaceState(null, '', '/work')} title="back" type="button" className="flex items-center w-fit h-fit z-50">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="none" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="square" strokeLinejoin="bevel" d="M15 19l-7-7 7-7"/>
+          </svg>
+          <p className="w-fit align-middle font-black">Back</p>
+        </button>
+      </div>
+
+    </div>
   );
 };
