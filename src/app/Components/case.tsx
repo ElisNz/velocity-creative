@@ -49,17 +49,17 @@ export default function Case({ images, workInfo, workList }: { images: string[],
   const caseName = decodeURI(path.split('/').pop() || '');
 
   return (
-    <div className="lg:flex">
+    <div className="md:flex">
 
-      <div className="max-[1024px]:hidden flex flex-col w-1/4 sticky top-4 p-2 gap-2 h-fit">
+      <div className="max-[1024px]:hidden flex flex-col w-1/4 sticky top-4 py-2 pr-8 gap-2 h-fit">
         {workList.map((work, index) => (
           <button key={index} onClick={() => window.history.replaceState(null, '', `/work/${encodeURIComponent(work)}`)}><h3 className={`${caseName === work ? 'text-[#FF0000]/50' : 'foreground-secondary'} text-[1.25rem] uppercase text-start`} key={index}>{work}</h3></button>
         ))}
       </div>
 
-      <div className="w-full h-fit flex flex-col gap-4">
+      <div className="w-full h-fit flex flex-col md:gap-4">
 
-          <div className="w-full grid grid-cols-2 gap-4 max-lg:grid-cols-1">
+          <div className="w-full grid md:grid-cols-2 gap-4 max-md:grid-cols-1">
             <section className="flex flex-col h-full">
               <div className="">
                 <h1 className="uppercase w-full text-left wrap-anywhere mb-2 self-start">{caseName}</h1>
@@ -75,21 +75,21 @@ export default function Case({ images, workInfo, workList }: { images: string[],
             </section>
           </div>
 
-        {/* <div className="lg:hidden sticky top-5 flex h-20 w-fit justify-start z-50 items-center px-4">
+        <div className="md:hidden sticky top-5 w-fit justify-start z-50 items-center md:px-4 pt-2">
           <button onClick={() => window.history.replaceState(null, '', '/work')} title="back" type="button" className="flex items-center w-fit h-fit z-50">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="none" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="square" strokeLinejoin="bevel" d="M15 19l-7-7 7-7"/>
             </svg>
             <p className="w-fit align-middle font-black">Back</p>
           </button>
-        </div> */}
+        </div>
 
 
-        <div id="mosaic" className="max-lg:hidden">
+        <div id="mosaic" className="max-md:hidden">
           <ImageMosaic images={images ?? []} caseName={caseName} />
         </div>
 
-        <div id="mosaic-mobile" className="lg:hidden"></div>
+        <div id="mosaic-mobile" className="md:hidden"></div>
           {images.map((image, i) => {
               return (
                 <div key={i} className="w-full">
@@ -108,7 +108,7 @@ export default function Case({ images, workInfo, workList }: { images: string[],
           })}
         </div>
 
-        <div className="max-lg:hidden sticky top-5 flex h-20 w-fit justify-start z-50 items-center px-4">
+        <div className="max-[1024px]:hidden sticky top-5 flex h-20 w-fit justify-start z-50 items-center px-4">
           <button onClick={() => window.history.replaceState(null, '', '/work')} title="back" type="button" className="flex items-center w-fit h-fit z-50">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="none" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="square" strokeLinejoin="bevel" d="M15 19l-7-7 7-7"/>
