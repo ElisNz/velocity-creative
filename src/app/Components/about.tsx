@@ -62,7 +62,7 @@ export default function About() {
         <p>AI is everywhere. But we combine it with something most don’t: a deep foundation in analogue image-making. We use AI to expand the language of photography—and to explore what images can become. We also offer custom-trained models based on original material.</p>
       </section>
       <section>
-        <h3>FAQ</h3>
+        <h2>FAQ</h2>
         <strong>Who owns the rights to AI-generated images?</strong>
         <p>Under EU law, AI-generated content is not automatically protected by copyright. Protection may arise where there is sufficient human creative input. We structure our process to include clear authorship and, where relevant, integrate original photographic material. This allows the work to be used exclusively for your brand within current EU legal frameworks.</p>
         

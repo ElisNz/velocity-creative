@@ -91,7 +91,11 @@ export default function Work({ props } : { props?: { blobs?: BlobItem[] } }) {
     })) || []
   ), [blobs]);
 
-  const activeCaseImages = selectedWork ? imageList[selectedWork.title.replace(' ', '-')] || [] : [];
+  const activeCaseImages = selectedWork ? imageList[selectedWork.title.replace(' ', '-')
+    .replace('ä', 'a')
+    .replace('å', 'a')
+    .replace('ö', 'o')
+  ] || [] : [];
 
   const onCoverClick = (title: string) => {
     window.history.replaceState(null, '', encodeURIComponent(title));
@@ -133,17 +137,17 @@ export default function Work({ props } : { props?: { blobs?: BlobItem[] } }) {
   }, [pathname]);
 
   return (
-    <div className={`w-full h-fit ${showWorkCovers ? 'lg:grid grid-cols-2' : 'flex flex-col'} items-center justify-center gap-[2rem]`}>
-      {showWorkCovers &&
-        work.map(({ title, coverImageUrl }) => 
-          <WorkCover key={title} title={title} coverImageUrl={coverImageUrl} />
-        )
-      }
-      
-      {showCase && selectedWork &&
-        <Case images={activeCaseImages} workInfo={selectedWork} workList={work.map(item => item.title)} />
-      }
+      <div className={`w-full h-fit ${showWorkCovers ? 'lg:grid grid-cols-2' : 'flex flex-col'} items-center justify-center gap-[2rem]`}>
+        {showWorkCovers &&
+          work.map(({ title, coverImageUrl }) => 
+            <WorkCover key={title} title={title} coverImageUrl={coverImageUrl} />
+          )
+        }
+        
+        {showCase && selectedWork &&
+          <Case images={activeCaseImages} workInfo={selectedWork} workList={work.map(item => item.title)} />
+        }
 
-    </div>
+      </div>
   );
 };
