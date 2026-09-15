@@ -2,10 +2,36 @@
 
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { workItem } from "../app/types";
 
 type ImageOrientation = 'landscape' | 'portrait';
+
+
+function reorderIsolatedPortraits(images: string[], orientations: Record<string, ImageOrientation>): string[] {
+  const isolated: string[] = [];
+  const rest: string[] = [];
+
+  images.forEach((src, i) => {
+    const orientation = orientations[src];
+    if (orientation !== 'portrait') {
+      rest.push(src);
+      return;
+    }
+
+    const prevOrientation = i > 0 ? orientations[images[i - 1]] : undefined;
+    const nextOrientation = i < images.length - 1 ? orientations[images[i + 1]] : undefined;
+    const hasPortraitNeighbor = prevOrientation === 'portrait' || nextOrientation === 'portrait';
+
+    if (hasPortraitNeighbor) {
+      rest.push(src);
+    } else {
+      isolated.push(src);
+    }
+  });
+
+  return [...rest, ...isolated];
+}
 
 function ImageMosaic({ images, caseName }: { images: string[], caseName: string }) {
   const [orientations, setOrientations] = useState<Record<string, ImageOrientation>>({});
@@ -18,9 +44,14 @@ function ImageMosaic({ images, caseName }: { images: string[], caseName: string 
     });
   }, []);
 
+  const orderedImages = useMemo(
+    () => reorderIsolatedPortraits(images, orientations),
+    [images, orientations]
+  );
+
   return (
     <div className="w-full flex flex-wrap gap-2">
-      {images.map((src, i) => {
+      {orderedImages.map((src, i) => {
         const orientation = orientations[src];
         const widthClass = orientation === 'portrait' ? 'w-[calc(50%-0.25rem)]' : 'w-full';
         
