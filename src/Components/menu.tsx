@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { About, Work, Contact } from '.';
 
-import { scene, scenes, BlobItem } from '../types';
+import { scene, scenes, BlobItem } from '../app/types';
 import './menu.css';
 
 

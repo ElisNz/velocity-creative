@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import Image from "next/image";
 import { list } from '@vercel/blob';
 
-import { StatusCodes } from "../types";
+import { StatusCodes } from "../app/types";
 import ShowreelVideo from "./showreel-video";
 
 const MOBILE_BREAKPOINT = 1024;

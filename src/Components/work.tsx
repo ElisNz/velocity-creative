@@ -3,9 +3,9 @@
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
-import { workItem } from '../types';
+import { workItem } from '../app/types';
 
-import { Case } from './';
+import { Case } from '.';
 
 
 const work: workItem[] = [

@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useState, useCallback } from "react";
-import { workItem } from "../types";
+import { workItem } from "../app/types";
 
 type ImageOrientation = 'landscape' | 'portrait';
 
